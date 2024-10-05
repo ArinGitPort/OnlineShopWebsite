@@ -1,0 +1,68 @@
+body{
+    margin: 0%;
+}
+
+
+.dashboardContainer{
+    display: inline-block;
+    width: 18%;
+    background: lightblue;
+    height: 100vh;
+
+}
+
+.dashboardProfile{
+    border-top: solid 1px;
+    border-bottom: solid 2px;
+    border-color: pink;
+    text-align: center;
+}
+
+.inventoryLabel{
+    font-weight: bolder;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+}
+
+.usernameLabel{
+    margin-top: 0px;
+    font-size: 25px;
+}
+
+.userIcon{
+    border: solid 1px;
+    border-color: white;
+    border-radius: 100px;
+    width: 30%;
+}
+
+.listDashboard{
+    font-size: 20px;
+    text-align: center;
+    padding-left: 0px;
+    list-style-type: none;
+    margin: 0;
+}
+
+.listDashboard li{
+    display: block;
+    height: 40px;
+}
+
+.menuDashboard{
+    display: block;
+    height: 100%;
+    line-height: 40px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: background-color 0.3s ease, box-shadow 0.3s;
+    
+}
+
+.menuDashboard:hover{
+    background-color: pink;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+}
+
