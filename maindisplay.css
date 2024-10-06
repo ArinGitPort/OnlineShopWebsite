@@ -62,3 +62,17 @@ body{
     outline: none;
     border-radius: 12px;
 }
+
+.tableDiv{
+    padding: 20px;
+    border: solid 1px;
+    border-radius: 12px;
+    height: 75vh;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center
+}
