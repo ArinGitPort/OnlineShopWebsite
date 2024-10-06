@@ -24,7 +24,7 @@
         <input name="passwordInp" class="passwordBox" type="password" placeholder="Password">
       </div>
       <div class="loginButtonDiv">
-        <button class="loginButton">Log In</button>
+        <button class="loginButton" onclick="loginUser()">Log In</button>
       </div>
     </form>
   </div>
@@ -67,6 +67,18 @@
 
   <script>
 
+
+    function loginUser() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (!username || !password) {
+        alert('Please fill in both fields.');
+        return false; // Prevent form submission
+      }
+      return true; // Allow form submission
+      
+    }
   </script>
 
 </body>
