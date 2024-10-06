@@ -46,15 +46,21 @@ body {
 .usernameBox {
   font-size: 20px;
   margin-bottom: 20px;
-  outline: none;
+  border-color: lightblue;
   border-radius: 6px;
+  outline: none;
+  box-shadow: 0 0 6px rgb(135, 202, 199, 1);
+
 }
 
 .passwordBox {
   font-size: 20px;
   margin-bottom: 20px;
   outline: none;
+  border-color: lightblue;
   border-radius: 6px;
+  box-shadow: 0 0 6px rgb(135, 202, 199, 1);
+
 }
 
 .loginButtonDiv {

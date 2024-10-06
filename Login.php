@@ -54,6 +54,7 @@
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
+      header("Location: home.php");
       echo "<script>alert('Login successful! Welcome, Bunniwinkle');</script>";
     } else {
       echo "<script>alert('Invalid username or password.');</script>";
