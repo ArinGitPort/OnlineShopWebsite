@@ -7,6 +7,7 @@ body{
     display: inline-block;
     width: 18%;
     background: lightblue;
+    box-shadow:0 0 6px rgb(88, 193, 219, 1);
     height: 100vh;
 
 }

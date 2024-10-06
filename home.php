@@ -8,10 +8,14 @@
     <title>Inventory</title>
 </head>
 
-<body>
-    <?php include 'sidebar.php'; ?>
+<div class="maindisplayDiv">
+        <div class="insideDisplayDiv">
+            
+        </div>
+    </div>
 
-    
+<body>
+    <?php include 'sidebar.php'; include 'maindisplay.php'; ?>
 
 </body>
 
