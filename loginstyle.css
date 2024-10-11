@@ -81,7 +81,7 @@ body {
   border: none;
   padding: 6px;
   font-size: 20px;
-  transition: background-color 1s ease, transform 1s ease, box-shadow 1s;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s;
 }
 
 .loginButton:hover {

@@ -21,6 +21,9 @@
                 <div><a href="inventory.php" class="menuDashboard">INVENTORY</a></div>
             </li>
             <li>
+                <div><a href="history.php" class="menuDashboard">ITEM HISTORY</a></div>
+            </li>
+            <li>
                 <div><a href="logout.php" class="menuDashboard">LOG-OUT</a></div>
             </li>
         </ul>
