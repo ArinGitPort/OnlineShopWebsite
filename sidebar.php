@@ -6,7 +6,7 @@
             <h1 class="inventoryLabel">INVENTORY</h1>
         </div>
         <div><img class="userIcon" src="bunniwinkleIcon.jpg" alt=""></div>
-        <div>
+        <div class="usernamelabelDiv">
             <h3 style="  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 ;" class="usernameLabel">Bunniwinkle</h3>
         </div>

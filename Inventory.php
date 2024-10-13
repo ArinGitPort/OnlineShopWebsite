@@ -54,8 +54,10 @@ if (isset($_POST['delete'])) {
 // Search functionality
 $searchQuery = "";
 if (isset($_POST['searchProduct'])) {
-    $searchQuery = " WHERE productname LIKE '%" . $conn->real_escape_string($_POST['searchProduct']) . "%'";
+    $searchProduct = addslashes($_POST['searchProduct']);
+    $searchQuery = " WHERE productname LIKE '%$searchProduct%'";
 }
+
 
 // Sort Alphabetically
 $sortQuery = "";
@@ -91,9 +93,9 @@ if (isset($_POST['sortAlpha'])) {
                 <!-- Add Item Form -->
                 <form method="POST" action="">
                     <div class="addinputField">
-                        <input class="addprodField" type="text" name="newProduct" placeholder="Product Name" required>
-                        <input class="addprodField" type="number" name="newQty" placeholder="Quantity" required>
-                        <input class="addprodField" type="number" step="0.01" name="newPrice" placeholder="Price" required>
+                        <input class="prodnameField" type="text" name="newProduct" placeholder="Product Name" required>
+                        <input class="prodqtyField" type="number" name="newQty" placeholder="Quantity" required>
+                        <input class="prodpriceField" type="number" step="0.01" name="newPrice" placeholder="Price" required>
                         <button type="submit" name="addItem" class="addButton">Add Item</button>
                     </div>
                 </form>
@@ -123,11 +125,11 @@ if (isset($_POST['sortAlpha'])) {
                                 <td>
                                     <form method='POST' action='' onsubmit='return confirmDelete();'>
                                         <input type='hidden' name='delete_id' value='" . $row['id'] . "'>
-                                        <button class='tableButton' type='submit' name='delete'>Delete</button>
+                                        <button class='deletetableButton' type='submit' name='delete'>Delete</button>
                                     </form>
                                     <form method='GET' action='edititem.php'>
                                         <input type='hidden' name='edit_id' value='" . $row['id'] . "'>
-                                        <button class='tableButton' type='submit' name='edit'>Edit</button>
+                                        <button class='edittableButton' type='submit' name='edit'>Edit</button>
                                     </form>
                                 </td>
                               </tr>";

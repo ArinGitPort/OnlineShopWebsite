@@ -1,14 +1,14 @@
 body {
-  background-color: pink;
+  background-color: #d8cec0;
 }
 
 .maindisplayDiv {
   border: solid 1px;
-  border-color: lightblue;
-  box-shadow: 0 0 6px rgb(88, 193, 219, 1);
+  border-color: #354359;
+  box-shadow: 0 0 6px rgb(0, 0, 0, 1);
   width: 80%; /* Occupies 80% of the page width */
   height: 100vh; /* Full height of the viewport */
-  background-color: lightblue; /* Adds a background color */
+  background-color: #97ada3;
   float: right; /* Makes it align to the right of the sidebar */
 }
 
@@ -16,32 +16,33 @@ body {
   display: flex;
   flex-direction: column;
   border: solid 1px;
-  border-color: lightblue;
-  box-shadow: 0 0 6px rgb(234, 156, 201);
+  border-radius: 4px;
+  border-color: #97ada3;
+  box-shadow: 0 0 6px rgb(0, 0, 0, 1);
   margin-top: 20px;
   margin-left: 20px;
   margin-right: 20px;
   height: 95vh;
-  background-color: rgb(250, 250, 250);
+  background-color: rgba(250, 250, 250, 0.9);
 }
 
-
-
-.addinputField{
+.addinputField {
   margin: 2px;
 }
 
 .userMenuDiv {
-  border: solid 1px;
+  background-color: rgba(250, 250, 250, 0.8);
+  border: none;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
   border-radius: 12px;
   margin-left: 30px;
   margin-right: 30px;
   margin-top: 20px;
   display: flex;
   flex-direction: row;
-  justify-content: center; /* Centers the elements horizontally */
-  align-items: center; /* Centers the elements vertically */
-  gap: 10px; /* Adds some space between the buttons and fields */
+  justify-content: center; 
+  align-items: center; 
+  gap: 10px; 
 }
 
 .searchprodField {
@@ -55,7 +56,9 @@ body {
   transition: all 0.3s ease;
 }
 
-.addprodField{
+.prodnameField {
+  margin-left: 40px;
+  margin-right: 5px;
   background-color: white;
   border: solid 1px;
   font-size: 20px;
@@ -65,16 +68,59 @@ body {
   transition: all 0.3s ease;
 }
 
-.searchprodField:hover {
-  background-color: lightblue;
-  box-shadow: 0 0 6px rgba(184, 112, 112, 1);
+.prodnameField:hover {
+  background-color: white;
+  box-shadow: 0 0 6px rgba(22, 73, 139, 0.671);
   transform: scale(1.1);
-  border-color: pink;
+  border-color: #354359;
+}
+
+.prodqtyField {
+  margin-right: 5px;
+  background-color: white;
+  border: solid 1px;
+  font-size: 20px;
+  outline: none;
+  width: 150px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.prodqtyField:hover {
+  background-color: white;
+  box-shadow: 0 0 6px rgba(22, 73, 139, 0.671);
+  transform: scale(1.1);
+  border-color: #354359;
+}
+
+.prodpriceField {
+  margin-right: 5px;
+  background-color: white;
+  border: solid 1px;
+  font-size: 20px;
+  outline: none;
+  width: 150px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.prodpriceField:hover {
+  background-color: white;
+  box-shadow: 0 0 6px rgba(22, 73, 139, 0.671);
+  transform: scale(1.1);
+  border-color: #354359;
+}
+
+.searchprodField:hover {
+  background-color: white;
+  box-shadow: 0 0 6px rgba(22, 73, 139, 0.671);
+  transform: scale(1.1);
+  border-color: #354359;
 }
 
 .searchButton {
   color: white;
-  background-color: hotpink;
+  background-color: #354359;
   border: none;
   margin: 4px;
   font-size: 20px;
@@ -84,15 +130,14 @@ body {
 }
 
 .searchButton:hover {
-  background-color: hotpink;
-  box-shadow: 0 0 6px rgba(184, 112, 112, 1);
+  box-shadow: 0 0 6px rgba(22, 73, 139, 0.671);
   transform: scale(1.1);
   cursor: pointer;
 }
 
 .sortAlphaButton {
   color: white;
-  background-color: hotpink;
+  background-color: #354359;
   border: none;
   margin: 4px;
   font-size: 20px;
@@ -101,18 +146,17 @@ body {
   transition: all 0.3s ease;
 }
 
-
 .sortAlphaButton:hover {
-  background-color: hotpink;
-  box-shadow: 0 0 6px rgba(184, 112, 112, 1);
+  box-shadow: 0 0 6px rgba(22, 73, 139, 0.5);
   transform: scale(1.1);
   cursor: pointer;
 }
 
-.addButton{
+.addButton {
   color: white;
-  background-color: hotpink;
+  background-color: #354359;
   border: none;
+  margin-left: 5px;
   font-size: 20px;
   outline: none;
   border-radius: 12px;
@@ -120,8 +164,7 @@ body {
 }
 
 .addButton:hover {
-  background-color: hotpink;
-  box-shadow: 0 0 6px rgba(184, 112, 112, 1);
+  box-shadow: 0 0 6px rgba(22, 73, 139, 0.671);
   transform: scale(1.1);
   cursor: pointer;
 }
@@ -145,46 +188,70 @@ body {
   justify-content: center;
 }
 
-.tableButton{
+.deletetableButton {
   border: none;
-  background-color: white;
+  border-radius: 8px;
+  background-color: #354359;
+  color: white;
   transition: all 0.3s ease;
-  margin: 6px;
-  font-size: 15px;
+  margin: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-.tableButton:hover{
+.deletetableButton:hover {
   cursor: pointer;
-  box-shadow: 0 0 6px rgba(184, 112, 112, 1);
+  box-shadow: 0 0 6px rgba(22, 73, 139, 0.671);
+  transform: scale(1.1);
+}
 
+.edittableButton {
+  border: none;
+  border-radius: 8px;
+  background-color: #354359;
+  color: white;
+  transition: all 0.3s ease;
+  margin: 5px;
+  font-weight: bold;
+  font-size: 18px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.edittableButton:hover {
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(22, 73, 139, 0.671);
+  transform: scale(1.1);
 }
 
 table {
+  overflow-x: auto;
   font-size: 20px;
   text-align: center;
-  border-collapse: collapse; 
-  border: 4px solid pink; 
+  border-collapse: collapse;
+  border: 4px solid #354359;
 }
 
-th, td {
-  border: 2px solid pink; 
-  padding: 8px; 
+th,
+td {
+  border: 2px solid rgba(51, 81, 126, 0.5);
+  padding: 8px;
 }
 
-
-
-
-
-.historyLabel{
+.historyLabel {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  margin-top: 6px;
+  margin-bottom: 0;
 }
 
 .historyTable {
   margin-top: 20px;
-  width: 100%; /* Makes the table take up the entire width of the parent div */
+  width: 80%; /* Makes the table take up the entire width of the parent div */
   overflow-x: auto; /* Allows horizontal scrolling if needed */
   margin-left: 0; /* Removes extra margin to make it fully extend */
   margin-right: 0; /* Removes extra margin to make it fully extend */
@@ -193,25 +260,50 @@ th, td {
   border-collapse: collapse; /* Ensures borders are collapsed */
 }
 
-
-.tableWrap{
+.tableWrap {
   overflow-x: auto; /* Enable horizontal scrolling */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.insideTabelDisplayDiv{
+.insideTabelDisplayDiv {
   overflow-x: auto; /* Enable horizontal scrolling */
   display: flex;
   flex-direction: column;
   border: solid 1px;
+  border-radius: 4px;
   border-color: lightblue;
-  box-shadow: 0 0 6px rgb(234, 156, 201);
+  box-shadow: 0 0 6px rgb(0, 0, 0, 1);
   margin-top: 20px;
   margin-left: 20px;
   margin-right: 20px;
   height: 95vh;
-  background-color: rgb(250, 250, 250);
+  background-color: rgba(250, 250, 250, 0.9);
+}
+
+input {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+button {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+
+hr {
+    border: 1px solid #354359; /* Color and thickness */
+    margin: 20px 0; /* Add spacing above and below */
+    box-shadow: 0 0 6px rgba(22, 73, 139, 0.479);
 
 }

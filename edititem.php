@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $update_sql = "UPDATE inventory SET productname = '$productName', qty = '$qty', price = '$price' WHERE id = $id";
     if ($conn->query($update_sql) === TRUE) {
         echo "Record updated successfully!";
-        header("Location: inventory.php");
+        header("Location: Inventory.php");
         exit;
     } else {
         echo "Error updating records: " . $conn->error;
@@ -38,22 +38,31 @@ $conn->close();
 <html lang="en">
 
 <head>
+    <link rel="stylesheet" href="edititem.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Product</title>
 </head>
 
 <body>
+    
+    <div class="editprodContainer">
     <h2>Edit Product</h2>
+    <div class="editForm">
     <form method="POST" action="">
-        <label>Product Name:</label><br>
+        <label>Product Name</label><br>
         <input type="text" name="productname" value="<?php echo $row['productname']; ?>" required><br><br>
-        <label>Quantity:</label><br>
+        <label>Quantity</label><br>
         <input type="number" name="qty" value="<?php echo $row['qty']; ?>" required><br><br>
-        <label>Price:</label><br>
+        <label>Price</label><br>
         <input type="number" name="price" value="<?php echo $row['price']; ?>" required><br><br>
-        <input type="submit" value="Update">
+        <div class="editformButton">
+        <input class="updateButton" type="submit" value="Update">
+        <input class="backButton" type="button" name="goback" value="Back" onclick="location.href='Inventory.php';">
     </form>
+    </div>
+    </div>
+    </div>
 </body>
 
 </html>

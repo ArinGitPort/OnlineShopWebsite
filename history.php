@@ -59,6 +59,7 @@ $deletedItemsResult = $conn->query($deletedItemsSql);
                 ?>
             </table>
             </div>
+            <hr>
 
             <h2 class="historyLabel">Deleted Items</h2>
             <div class="tableWrap">
