@@ -6,10 +6,10 @@ body {
   border: solid 1px;
   border-color: #354359;
   box-shadow: 0 0 6px rgb(0, 0, 0, 1);
-  width: 80%; /* Occupies 80% of the page width */
-  height: 100vh; /* Full height of the viewport */
+  width: 80%; 
+  height: 100vh; 
   background-color: #97ada3;
-  float: right; /* Makes it align to the right of the sidebar */
+  float: right; 
 }
 
 .insideDisplayDiv {
