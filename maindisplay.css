@@ -1,15 +1,17 @@
 body {
   background-color: #d8cec0;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 
 .maindisplayDiv {
   border: solid 1px;
   border-color: #354359;
   box-shadow: 0 0 6px rgb(0, 0, 0, 1);
-  width: 80%; 
-  height: 100vh; 
+  width: 80%;
+  height: 100vh;
   background-color: #97ada3;
-  float: right; 
+  float: right;
 }
 
 .insideDisplayDiv {
@@ -26,9 +28,7 @@ body {
   background-color: rgba(250, 250, 250, 0.9);
 }
 
-.addinputField {
-  margin: 2px;
-}
+
 
 .userMenuDiv {
   background-color: rgba(250, 250, 250, 0.8);
@@ -40,9 +40,9 @@ body {
   margin-top: 20px;
   display: flex;
   flex-direction: row;
-  justify-content: center; 
-  align-items: center; 
-  gap: 10px; 
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .searchprodField {
@@ -57,7 +57,7 @@ body {
 }
 
 .prodnameField {
-  margin-left: 40px;
+  
   margin-right: 5px;
   background-color: white;
   border: solid 1px;
@@ -105,6 +105,26 @@ body {
 }
 
 .prodpriceField:hover {
+  background-color: white;
+  box-shadow: 0 0 6px rgba(22, 73, 139, 0.671);
+  transform: scale(1.1);
+  border-color: #354359;
+}
+
+.prodcategoryField {
+  justify-content: top;
+  padding: 6px;
+  margin-right: 5px;
+  background-color: white;
+  border: solid 1px;
+  font-size: 15px;
+  outline: none;
+  width: 150px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.prodcategoryField:hover {
   background-color: white;
   box-shadow: 0 0 6px rgba(22, 73, 139, 0.671);
   transform: scale(1.1);
@@ -164,6 +184,23 @@ body {
 }
 
 .addButton:hover {
+  box-shadow: 0 0 6px rgba(22, 73, 139, 0.671);
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.addItemButton {
+  color: white;
+  background-color: #354359;
+  border: none;
+  margin-left: 5px;
+  font-size: 20px;
+  outline: none;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.addItemButton:hover {
   box-shadow: 0 0 6px rgba(22, 73, 139, 0.671);
   transform: scale(1.1);
   cursor: pointer;
@@ -240,13 +277,28 @@ td {
   padding: 8px;
 }
 
-.historyLabel {
+.historylabelDiv{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 6px;
+}
+
+.historyLabel {
+  border: solid 1px;
+  border-radius: 12px;
+  background-color: #354359;
+  color: white;
+  border-color: #354359;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
   margin-bottom: 0;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+
 }
 
 .historyTable {
@@ -300,10 +352,8 @@ button {
   padding-bottom: 4px;
 }
 
-
 hr {
-    border: 1px solid #354359; /* Color and thickness */
-    margin: 20px 0; /* Add spacing above and below */
-    box-shadow: 0 0 6px rgba(22, 73, 139, 0.479);
-
+  border: 1px solid #354359; /* Color and thickness */
+  margin: 20px 0; /* Add spacing above and below */
+  box-shadow: 0 0 6px rgba(22, 73, 139, 0.479);
 }

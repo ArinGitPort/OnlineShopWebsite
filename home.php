@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="maindisplay.css">
+    <link rel="stylesheet" href="home.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory</title>
@@ -16,7 +16,7 @@
     <div class="maindisplayDiv">
         <div class="insideDisplayDiv">
             <!-- Title above the slideshow -->
-            <h2 class="slideshow-title">WELCOME</h2>
+            <h2 class="slideshow-title">WELCOME TO BUNNIWINKLE</h2>
 
             <!-- Slideshow container -->
             <div class="slideshow-container">

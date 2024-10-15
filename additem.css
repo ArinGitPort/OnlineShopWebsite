@@ -1,0 +1,98 @@
+body {
+  background-color: #d8cec0;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+h2{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 30px;
+  width: 100%;
+  border-bottom: solid 1px;
+}
+
+/* Add Order Form Styles */
+.addinputField {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #354359;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(21, 26, 35, 0.5);
+  width: 300px;
+  padding: 20px;
+  background-color: #97ada3;
+}
+
+.addinputField h2 {
+  color: white;
+  margin-bottom: 20px;
+}
+
+.addinputField label {
+  font-weight: bold;
+  color: white;
+  margin: 5px 0;
+  display: block;
+}
+
+.orderprodnameField,
+.orderprodqtyField,
+.orderprodpriceField,
+.prodcategoryField,
+.customernameField {
+  width: calc(100% - 10px);
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #354359;
+  border-radius: 5px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.orderprodnameField:focus,
+.orderprodqtyField:focus,
+.orderprodpriceField:focus,
+.prodcategoryField:focus,
+.customernameField:focus {
+  border-color: #354359;
+  box-shadow: 0 0 5px rgba(22, 73, 139, 0.671);
+}
+
+/* Button Styling */
+.addButton,
+.backButton {
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #354359;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.ordersearchProduct {
+  background-color: white;
+  border: solid 1px;
+  width: 250px;
+  margin: 10px;
+  font-size: 20px;
+  outline: none;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.addButton:hover,
+.backButton:hover {
+  background-color: #2a3b4d;
+}
+
