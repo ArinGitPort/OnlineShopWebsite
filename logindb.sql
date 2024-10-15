@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2024 at 07:53 PM
+-- Generation Time: Oct 15, 2024 at 06:37 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -47,7 +47,8 @@ INSERT INTO `addeditem` (`id`, `productname`, `qty`, `price`, `dateadded`) VALUE
 (15, 'rfg', 123, 45, '2024-10-11 18:08:35'),
 (16, 'asd', 213, 2, '2024-10-11 18:16:24'),
 (17, 'gfdf', 2, 21, '2024-10-13 15:43:39'),
-(18, 'cfd', 2, 3, '2024-10-13 15:43:45');
+(18, 'cfd', 2, 3, '2024-10-13 15:43:45'),
+(19, 'Clay', 2, 0, '2024-10-14 07:51:29');
 
 -- --------------------------------------------------------
 
@@ -79,7 +80,9 @@ INSERT INTO `deleteditem` (`id`, `deletedproduct`, `datedeleted`) VALUES
 (12, 'alleb2', '2024-10-11 18:08:38'),
 (13, 'asd', '2024-10-11 18:08:39'),
 (14, 'sdg', '2024-10-11 18:08:39'),
-(15, 'rfg', '2024-10-11 18:08:40');
+(15, 'rfg', '2024-10-11 18:08:40'),
+(16, 'asd', '2024-10-14 07:50:11'),
+(18, 'cfd', '2024-10-14 07:50:16');
 
 -- --------------------------------------------------------
 
@@ -91,17 +94,53 @@ CREATE TABLE `inventory` (
   `id` int(11) NOT NULL,
   `productname` varchar(80) NOT NULL,
   `qty` int(255) NOT NULL,
-  `price` int(255) NOT NULL
+  `price` int(255) NOT NULL,
+  `category` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `inventory`
 --
 
-INSERT INTO `inventory` (`id`, `productname`, `qty`, `price`) VALUES
-(16, 'asd', 213, 2),
-(17, 'gfdf', 2, 21),
-(18, 'cfd', 2, 3);
+INSERT INTO `inventory` (`id`, `productname`, `qty`, `price`, `category`) VALUES
+(17, 'gfdf', 2, 21, ''),
+(19, 'Clay', 2, 0, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `productorder`
+--
+
+CREATE TABLE `productorder` (
+  `id` int(11) NOT NULL,
+  `productname` varchar(50) NOT NULL,
+  `qty` int(100) NOT NULL,
+  `price` int(100) NOT NULL,
+  `category` varchar(50) NOT NULL,
+  `customername` varchar(100) NOT NULL,
+  `dateadded` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `productorder`
+--
+
+INSERT INTO `productorder` (`id`, `productname`, `qty`, `price`, `category`, `customername`, `dateadded`) VALUES
+(1, 'Clay', 20, 100, 'Bunni Charms', 'Allen', '2024-10-15 14:55:30'),
+(2, 'Toy', 2, 50, 'Bunni Charms', 'Allen', '2024-10-15 14:58:10'),
+(3, 'Controller', 30, 200, 'Phone Strap', 'Allen', '2024-10-15 15:01:24'),
+(4, 'Bag', 30, 200, 'Phone Strap', 'Allen', '2024-10-15 15:04:21'),
+(5, 'Bag', 30, 200, 'Phone Strap', 'Allen', '2024-10-15 15:06:10'),
+(6, 'Bag', 30, 200, 'Phone Strap', 'Allen', '2024-10-15 15:07:03'),
+(7, 'Bag', 30, 200, 'Phone Strap', 'Allen', '2024-10-15 15:08:58'),
+(8, 'Bag', 30, 200, 'Phone Strap', 'Allen', '2024-10-15 15:09:20'),
+(9, 'Food', 4, 34, 'Phone Strap', 'Allen', '2024-10-15 15:17:00'),
+(10, 'Chao Fan', 4, 34, 'Phone Strap', 'Allen', '2024-10-15 15:17:29'),
+(11, 'Aqua Flask', 2, 123, '', 'Allen', '2024-10-15 15:33:00'),
+(12, 'Clay', 2, 3, '', 'Allen', '2024-10-15 15:33:22'),
+(13, 'Clay2', 1, 2, '', 'Allen', '2024-10-15 15:33:36'),
+(14, 'Bag', 1, 3, 'Boxes and Bundles', 'Allen', '2024-10-15 15:36:05');
 
 -- --------------------------------------------------------
 
@@ -139,6 +178,12 @@ ALTER TABLE `inventory`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `productorder`
+--
+ALTER TABLE `productorder`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `userinfo`
 --
 ALTER TABLE `userinfo`
@@ -152,13 +197,19 @@ ALTER TABLE `userinfo`
 -- AUTO_INCREMENT for table `deleteditem`
 --
 ALTER TABLE `deleteditem`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `productorder`
+--
+ALTER TABLE `productorder`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `userinfo`
