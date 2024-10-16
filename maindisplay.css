@@ -213,22 +213,6 @@ body {
   cursor: pointer;
 }
 
-.addItemButton {
-  color: white;
-  background-color: #354359;
-  border: none;
-  margin-left: 5px;
-  font-size: 20px;
-  outline: none;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-}
-
-.addItemButton:hover {
-  box-shadow: 0 0 6px rgba(22, 73, 139, 0.671);
-  transform: scale(1.1);
-  cursor: pointer;
-}
 
 .tableContainer {
   margin-top: 20px;

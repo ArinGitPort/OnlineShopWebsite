@@ -1,3 +1,59 @@
+<?php
+session_start(); // Start the session at the very top of the file
+
+$conn = new mysqli("localhost", "root", "", "logindb");
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Handle search and sorting
+$searchQuery = "";
+if (isset($_POST['searchProduct'])) {
+    $searchProduct = addslashes($_POST['searchProduct']);
+    $searchQuery = " WHERE productname LIKE '%$searchProduct%' OR customername LIKE '%$searchProduct%'";
+}
+
+$sortQuery = "";
+if (isset($_POST['sortAlpha'])) {
+    $sortQuery = " ORDER BY productname ASC";
+}
+
+// Fetch items with the search and sorting
+$sql = "SELECT id, productname, qty, price, category, customername, dateadded FROM productorder" . $searchQuery . $sortQuery;
+$result = $conn->query($sql);
+
+// Handle deletion
+if (isset($_POST['delete'])) {
+    $delete_id = intval($_POST['delete_id']);
+    
+    // Fetch the item details to be deleted
+    $itemSql = "SELECT productname, qty, price, category, customername, dateadded FROM productorder WHERE id = $delete_id";
+    $itemResult = $conn->query($itemSql);
+    
+    if ($itemResult->num_rows > 0) {
+        $itemRow = $itemResult->fetch_assoc();
+        
+        // Insert the item into orderhistory before deleting
+        $insertHistorySql = "INSERT INTO orderhistory (productname, qty, price, category, customername, datecompleted) 
+                             VALUES ('" . $itemRow['productname'] . "', " . $itemRow['qty'] . ", " . $itemRow['price'] . ", '" . $itemRow['category'] . "', '" . $itemRow['customername'] . "', NOW())";
+        
+        if ($conn->query($insertHistorySql) === TRUE) {
+            // Now delete the item from productorder
+            $deleteSql = "DELETE FROM productorder WHERE id = $delete_id";
+            if ($conn->query($deleteSql) === TRUE) {
+                echo "<script>alert('Order deleted and moved to history successfully.'); window.location.href = window.location.href;</script>";
+            } else {
+                echo "<script>alert('Error deleting order: " . $conn->error . "');</script>";
+            }
+        } else {
+            echo "<script>alert('Error moving to history: " . $conn->error . "');</script>";
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,8 +74,7 @@
             <div class="userMenuDiv">
                 <!-- Search and Sort Alphabetically Form -->
                 <form method="POST" action="">
-                    <input type="text" name="searchProduct" class="ordersearchProduct"
-                        placeholder="Search Product or Customer">
+                    <input type="text" name="searchProduct" class="ordersearchProduct" placeholder="Search Product or Customer">
                     <button type="submit" class="searchButton">Search</button>
                     <button type="submit" name="sortAlpha" class="sortAlphaButton">Sort Alphabetically</button>
                 </form>
@@ -42,30 +97,6 @@
                         <th>Action</th>
                     </tr>
                     <?php
-                    // Generate the orders table
-                    $conn = new mysqli("localhost", "root", "", "logindb");
-
-                    // Check connection
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
-
-                    // Handle search and sorting
-                    $searchQuery = "";
-                    if (isset($_POST['searchProduct'])) {
-                        $searchProduct = addslashes($_POST['searchProduct']);
-                        $searchQuery = " WHERE productname LIKE '%$searchProduct%' OR customername LIKE '%$searchProduct%'";
-                    }
-
-                    $sortQuery = "";
-                    if (isset($_POST['sortAlpha'])) {
-                        $sortQuery = " ORDER BY productname ASC";
-                    }
-
-                    // Fetch items with the search and sorting
-                    $sql = "SELECT id, productname, qty, price, category, customername, dateadded FROM productorder" . $searchQuery . $sortQuery;
-                    $result = $conn->query($sql);
-
                     // Check if items exist and display them
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
@@ -85,7 +116,7 @@
                                         <input type='hidden' name='delete_id' value='" . $row['id'] . "'>
                                         <button class='deletetableButton' type='submit' name='delete'>Delete</button>
                                     </form>
-                                    <form method='GET' action='edititem.php'>
+                                    <form method='GET' action='editorder.php'>
                                         <input type='hidden' name='edit_id' value='" . $row['id'] . "'>
                                         <button class='edittableButton' type='submit' name='edit'>Edit</button>
                                     </form>

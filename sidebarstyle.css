@@ -23,21 +23,18 @@ body {
 
 .inventoryLabel {
   font-weight: bolder;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
   font-size: 30px;
   color: white;
 }
 
 .usernameLabel {
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
   margin-top: 20px;
   font-size: 25px;
   color: white;
   cursor: pointer;
 }
-
 
 .userIcon {
   border: solid 1px;
@@ -61,26 +58,34 @@ body {
 }
 
 .menuDashboard {
-  display: block;
+  display: inline-block;
   height: 100%;
   line-height: 40px;
   font-size: 23px;
   text-decoration: none;
   color: white;
   font-weight: bold;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
   transition: all 0.3s ease;
 }
 
-.menuDashboard:hover {
-  color: white;
-  background-color: #354359;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
-  transform: scale(1.1);
-  font-weight: bolder;
+.imgIcon {
+  width: 20px;
+  margin-right: 10px;
+  vertical-align: left;
 }
 
-.imgIcon{
-  width: 20px;
+.listDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  transition: all 0.3s ease;
+}
+
+.listDiv:hover {
+  background-color: #354359;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
 }
