@@ -31,8 +31,6 @@ if (isset($_POST['addOrder'])) {
 $conn->close();
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,6 +41,19 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add New Order</title>
+    <style>
+        .button-container {
+            display: flex;
+            gap: 10px; /* Space between buttons */
+            margin-top: 20px;
+        }
+
+        .addnewOrder, .orderbackButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -51,15 +62,13 @@ $conn->close();
         <div class="addinputField">
             <h2>Add New Order</h2>
             <label for="newProduct">Product Name</label>
-            <input class="orderprodnameField" type="text" id="newProduct" name="newProduct" placeholder="Product Name"
-                required>
+            <input class="orderprodnameField" type="text" id="newProduct" name="newProduct" placeholder="Product Name" required>
 
             <label for="newQty">Quantity</label>
             <input class="orderprodqtyField" type="number" id="newQty" name="newQty" placeholder="Quantity" required>
 
             <label for="newPrice">Price</label>
-            <input class="orderprodpriceField" type="number" step="0.01" id="newPrice" name="newPrice"
-                placeholder="Price" required>
+            <input class="orderprodpriceField" type="number" step="0.01" id="newPrice" name="newPrice" placeholder="Price" required>
 
             <!-- Category Dropdown -->
             <label for="newCategory">Category</label>
@@ -82,18 +91,15 @@ $conn->close();
                 <option value="Boxes and Bundles">Boxes and Bundles</option>
             </select>
 
-
             <label for="customerName">Customer Name</label>
-            <input class="customernameField" type="text" id="customerName" name="customerName"
-                placeholder="Customer Name" required>
+            <input class="customernameField" type="text" id="customerName" name="customerName" placeholder="Customer Name" required>
 
-            <button type="submit" name="addOrder" class="addnewOrder">Add Order</button>
+            <!-- Button Container -->
+            <div class="button-container">
+                <button type="submit" name="addOrder" class="addnewOrder">Add Order</button>
+                <button type="button" class="orderbackButton" onclick="window.location.href='productorder.php';">Back</button>
+            </div>
         </div>
-    </form>
-
-    <!-- Back Button -->
-    <form method="GET" action="productorder.php">
-        <button type="submit" class="backButton">Back to Product Orders</button>
     </form>
 </body>
 

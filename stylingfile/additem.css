@@ -86,6 +86,23 @@ h2{
   cursor: pointer;
 }
 
+.orderbackButton {
+  color: white;
+  background-color: #354359;
+  border: none;
+  margin: 4px;
+  font-size: 20px;
+  outline: none;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.orderbackButton:hover {
+  box-shadow: 0 0 6px rgba(22, 73, 139, 0.5);
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
 .addnewOrder {
   color: white;
   background-color: #354359;

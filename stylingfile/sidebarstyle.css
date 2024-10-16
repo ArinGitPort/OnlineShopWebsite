@@ -101,7 +101,7 @@ body {
     position: absolute;
     background-color: #97ada3;
     width: 180px; /* Set the width to the desired size */
-    height: 150px; /* Automatically adjust height based on content */
+    height: 130px; /* Automatically adjust height based on content */
     z-index: 1;
     padding: 10px; /* Add padding for spacing inside the dropdown */
     margin: 0;
