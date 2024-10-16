@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="maindisplay.css">
-    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="stylingfile/maindisplay.css">
+    <link rel="stylesheet" href="stylingfile/home.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory</title>
@@ -24,19 +24,19 @@
                 <!-- Full-width images with number and caption text -->
                 <div class="mySlides fade">
                     <div class="numbertext">1 / 3</div>
-                    <img src="bunniwinkleBG.jpg" class="slideshow-image">
+                    <img src="imgBG/bunniwinkleBG.jpg" class="slideshow-image">
                     <div class="text"></div>
                 </div>
 
                 <div class="mySlides fade">
                     <div class="numbertext">2 / 3</div>
-                    <img src="bunniliveshop.jpg" class="slideshow-image">
+                    <img src="imgBG/bunniliveshop.jpg" class="slideshow-image">
                     <div class="text"></div>
                 </div>
 
                 <div class="mySlides fade">
                     <div class="numbertext">3 / 3</div>
-                    <img src="bunniartscraft.jpg" class="slideshow-image">
+                    <img src="imgBG/bunniartscraft.jpg" class="slideshow-image">
                     <div class="text"></div>
                 </div>
 

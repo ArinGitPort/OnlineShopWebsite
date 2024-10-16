@@ -58,8 +58,8 @@ if (isset($_POST['delete'])) {
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="maindisplay.css">
-    <link rel="stylesheet" href="additem.css">
+    <link rel="stylesheet" href="stylingfile/maindisplay.css">
+    <link rel="stylesheet" href="stylingfile/additem.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Item Orders</title>
@@ -80,7 +80,7 @@ if (isset($_POST['delete'])) {
                 </form>
 
                 <!-- Link to Add Order Form -->
-                <button class="addItemButton" onclick="window.location.href='additem.php'">Add New Order</button>
+                <button class="addnewOrder" onclick="window.location.href='additem.php'">Add New Order</button>
             </div>
 
             <div class="tableContainer">

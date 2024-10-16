@@ -1,11 +1,11 @@
-<link rel="stylesheet" href="sidebarstyle.css">
+<link rel="stylesheet" href="stylingfile/sidebarstyle.css">
 
 <div class="dashboardContainer">
     <div class="dashboardProfile">
         <div>
             <h1 class="inventoryLabel">INVENTORY</h1>
         </div>
-        <div><img class="userIcon" src="bunniwinkleIcon.jpg" alt=""></div>
+        <div><img class="userIcon" src="imgBG/bunniwinkleIcon.jpg" alt=""></div>
         <div class="usernamelabelDiv">
             <h3 class="usernameLabel">Bunniwinkle</h3>
         </div>
