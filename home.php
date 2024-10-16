@@ -13,8 +13,8 @@
 
     <?php include 'sidebar.php' ?>
 
-    <div class="maindisplayDiv">
-        <div class="insideDisplayDiv">
+    <div class="maindisplayDiv2">
+        <div class="insideDisplayDiv2">
             <!-- Title above the slideshow -->
             <h2 class="slideshow-title">WELCOME TO BUNNIWINKLE</h2>
 

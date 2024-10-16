@@ -14,7 +14,8 @@
     <div class="sidebarMenuContainer">
         <ul class="listDashboard">
             <li>
-                <div><a href="home.php" class="menuDashboard">HOME</a></div>
+                <div>
+                    <a href="home.php" class="menuDashboard">HOME</a></div>
             </li>
             <li>
                 <div><a href="productorder.php" class="menuDashboard">ORDER</a></div>
