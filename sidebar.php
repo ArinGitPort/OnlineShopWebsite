@@ -5,10 +5,7 @@
         <div>
             <h1 class="inventoryLabel">INVENTORY</h1>
         </div>
-        <div><img class="userIcon" src="imgBG/bunniwinkleIcon.jpg" alt=""></div>
-        <div class="usernamelabelDiv">
-            <h3 class="usernameLabel">Bunniwinkle</h3>
-        </div>
+        <div><img class="userIcon" src="imgBG/bunniwinkelanotherlogo.jpg" alt=""></div>
     </div>
 
     <div class="sidebarMenuContainer">
@@ -52,45 +49,6 @@
     </div>
 </div>
 
-
-<style>
-    /* Dropdown Menu Styles */
-    .dropdown {
-        position: relative;
-        text-align: center;
-    }
-
-    .dropdown-container {
-        display: inline-block;
-        position: relative;
-        width: 100%;
-    }
-
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        left: 44.5%;
-        transform: translateX(-50%);
-        background-color: #97ada3;
-        width: 100%;
-        border-right: solid 1px;
-        z-index: 1;
-        padding-left:  20px;
-        margin: 0;
-    }
-
-    .dropdown-item {
-        margin: 0;
-        padding-top: 20px;
-        color: white;
-        text-decoration: none;
-        display: block;
-        font-size: 18px;
-        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
-    }
-
-    
-</style>
 
 <script>
     function toggleDropdown() {

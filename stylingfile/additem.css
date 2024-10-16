@@ -77,7 +77,13 @@ h2{
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.addButton, .backButton:hover {
+  box-shadow: 0 0 6px rgba(22, 73, 139, 0.5);
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
 .addnewOrder {
@@ -87,7 +93,7 @@ h2{
   margin: 4px;
   font-size: 20px;
   outline: none;
-  border-radius: 12px;
+  border-radius: 5px;
   transition: all 0.3s ease;
 }
 

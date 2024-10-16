@@ -71,6 +71,7 @@ if (isset($_POST['sortAlpha'])) {
 
 <head>
     <link rel="stylesheet" href="stylingfile/maindisplay.css">
+    <link rel="icon" href="iconlogo/bunniwinkleIcon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory</title>
@@ -99,7 +100,7 @@ if (isset($_POST['sortAlpha'])) {
                             required min="0">
 
 
-                        <!-- Category Dropdown or Input Field -->
+                        <!-- This shi breaks when adding div -->
                         <select name="newCategory" id="newCategory" class="prodcategoryField" required>
                             <option value="General Goods">General Goods</option>
                             <option value="Bunni Charms">Bunni Charms</option>

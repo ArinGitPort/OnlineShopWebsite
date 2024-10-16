@@ -43,7 +43,8 @@ if (isset($_POST['delete'])) {
             // Now delete the item from productorder
             $deleteSql = "DELETE FROM productorder WHERE id = $delete_id";
             if ($conn->query($deleteSql) === TRUE) {
-                echo "<script>alert('Order deleted and moved to history successfully.'); window.location.href = window.location.href;</script>";
+                // No success alert here
+                echo "<script>window.location.href = window.location.href;</script>"; // Just refresh the page
             } else {
                 echo "<script>alert('Error deleting order: " . $conn->error . "');</script>";
             }
@@ -52,6 +53,7 @@ if (isset($_POST['delete'])) {
         }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -60,6 +62,7 @@ if (isset($_POST['delete'])) {
 <head>
     <link rel="stylesheet" href="stylingfile/maindisplay.css">
     <link rel="stylesheet" href="stylingfile/additem.css">
+    <link rel="icon" href="iconlogo/bunniwinkleIcon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Item Orders</title>
@@ -135,10 +138,11 @@ if (isset($_POST['delete'])) {
     </div>
 
     <script>
-        function confirmDelete() {
-            return confirm('Are you sure you want to delete this order?');
-        }
-    </script>
+    function confirmDelete() {
+        return confirm('Are you sure you want to delete this order?'); // Only this confirmation is shown
+    }
+</script>
+
 
 </body>
 

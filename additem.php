@@ -39,6 +39,7 @@ $conn->close();
 <head>
     <link rel="stylesheet" href="stylingfile/maindisplay.css">
     <link rel="stylesheet" href="stylingfile/additem.css">
+    <link rel="icon" href="iconlogo/bunniwinkleIcon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add New Order</title>
@@ -86,7 +87,7 @@ $conn->close();
             <input class="customernameField" type="text" id="customerName" name="customerName"
                 placeholder="Customer Name" required>
 
-            <button type="submit" name="addOrder" class="addButton">Add Order</button>
+            <button type="submit" name="addOrder" class="addnewOrder">Add Order</button>
         </div>
     </form>
 

@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="stylingfile/home.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="iconlogo/bunniwinkleIcon.ico">
     <title>Inventory</title>
 </head>
 

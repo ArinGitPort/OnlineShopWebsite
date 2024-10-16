@@ -1,4 +1,4 @@
-<?php
+<a?php
 session_start();
 $conn = new mysqli("localhost", "root", "", "logindb");
 
@@ -21,6 +21,7 @@ $deletedItemsResult = $conn->query($deletedItemsSql);
 
 <head>
     <link rel="stylesheet" href="stylingfile/maindisplay.css">
+    <link rel="icon" href="iconlogo/bunniwinkleIcon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>History</title>
@@ -32,7 +33,7 @@ $deletedItemsResult = $conn->query($deletedItemsSql);
 
     <div class="maindisplayDiv">
         <div class="insideTabelDisplayDiv">
-            <h2 class="historyLabel">Added Items</h2>
+            <a class="historyLabel">Added Items</a>
             <div class="tableWrap">
             <table class="historyTable">
                 <tr>

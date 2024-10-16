@@ -81,7 +81,7 @@ body {
   margin-left: 5px;
   font-size: 20px;
   outline: none;
-  border-radius: 12px;
+  border-radius: 5px;
   transition: all 0.3s ease;
 }
 
@@ -115,7 +115,7 @@ body {
   margin-left: 5px;
   font-size: 20px;
   outline: none;
-  border-radius: 12px;
+  border-radius: 5px;
   transition: all 0.3s ease;
 }
 
