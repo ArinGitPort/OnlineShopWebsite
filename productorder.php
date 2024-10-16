@@ -36,13 +36,19 @@
                         <th>QTY</th>
                         <th>Price</th>
                         <th>Category</th>
-                        <th>Customer Name</th> <!-- New Customer Name Column -->
+                        <th>Customer Name</th>
                         <th>Total Price</th> <!-- New Total Price Column -->
+                        <th>Date Added</th>
                         <th>Action</th>
                     </tr>
                     <?php
                     // Generate the orders table
                     $conn = new mysqli("localhost", "root", "", "logindb");
+
+                    // Check connection
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+                    }
 
                     // Handle search and sorting
                     $searchQuery = "";
@@ -56,12 +62,15 @@
                         $sortQuery = " ORDER BY productname ASC";
                     }
 
-                    $sql = "SELECT id, productname, qty, price, category, customername FROM productorder" . $searchQuery . $sortQuery;
+                    // Fetch items with the search and sorting
+                    $sql = "SELECT id, productname, qty, price, category, customername, dateadded FROM productorder" . $searchQuery . $sortQuery;
                     $result = $conn->query($sql);
 
+                    // Check if items exist and display them
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
-                            $totalPrice = $row['qty'] * $row['price']; // Calculate total price
+                            // Calculate total price for the row
+                            $totalPrice = $row['qty'] * $row['price']; 
                             echo "<tr>
                                 <td>" . $row['id'] . "</td>
                                 <td>" . $row['productname'] . "</td>
@@ -70,6 +79,7 @@
                                 <td>" . $row['category'] . "</td>
                                 <td>" . $row['customername'] . "</td>
                                 <td>" . number_format($totalPrice, 2) . "</td> <!-- Display Total Price -->
+                                <td>" . $row['dateadded'] . "</td>
                                 <td>
                                     <form method='POST' action='' onsubmit='return confirmDelete();'>
                                         <input type='hidden' name='delete_id' value='" . $row['id'] . "'>
@@ -83,7 +93,7 @@
                               </tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='8'>No orders found</td></tr>"; // Adjusted colspan for the new column
+                        echo "<tr><td colspan='9'>No orders found</td></tr>"; // Adjusted colspan for the new column
                     }
 
                     $conn->close();

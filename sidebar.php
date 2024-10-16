@@ -29,7 +29,7 @@
                     <ul class="dropdown-content" id="dropdownContent">
                         <li><a href="added_items.php" class="dropdown-item">Added Items</a></li>
                         <li><a href="deleted_items.php" class="dropdown-item">Deleted Items</a></li>
-                        <li><a href="order_history.php" class="dropdown-item">Order History</a></li>
+                        <li><a href="order_history.php" class="dropdown-item">Completed Order</a></li>
                     </ul>
                 </div>
             </li>

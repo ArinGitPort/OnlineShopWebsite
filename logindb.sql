@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2024 at 06:37 PM
+-- Generation Time: Oct 16, 2024 at 07:26 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -109,6 +109,22 @@ INSERT INTO `inventory` (`id`, `productname`, `qty`, `price`, `category`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `orderhistory`
+--
+
+CREATE TABLE `orderhistory` (
+  `id` int(11) NOT NULL,
+  `productname` varchar(100) NOT NULL,
+  `qty` int(50) NOT NULL,
+  `price` int(50) NOT NULL,
+  `category` varchar(100) NOT NULL,
+  `customername` varchar(100) NOT NULL,
+  `datecompleted` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `productorder`
 --
 
@@ -140,7 +156,12 @@ INSERT INTO `productorder` (`id`, `productname`, `qty`, `price`, `category`, `cu
 (11, 'Aqua Flask', 2, 123, '', 'Allen', '2024-10-15 15:33:00'),
 (12, 'Clay', 2, 3, '', 'Allen', '2024-10-15 15:33:22'),
 (13, 'Clay2', 1, 2, '', 'Allen', '2024-10-15 15:33:36'),
-(14, 'Bag', 1, 3, 'Boxes and Bundles', 'Allen', '2024-10-15 15:36:05');
+(14, 'Bag', 1, 3, 'Boxes and Bundles', 'Allen', '2024-10-15 15:36:05'),
+(15, 'Toy', 23, 60, 'General Goods', 'Jeremiah', '2024-10-16 05:07:14'),
+(16, 'Controller', 10, 200, 'General Goods', 'Jorge', '2024-10-16 05:11:40'),
+(17, 'Laptop', 5, 2000, 'Boxes and Bundles', 'Joshua', '2024-10-16 05:15:11'),
+(18, 'Iphone', 10, 300, 'General Goods', 'Joshua', '2024-10-16 05:15:41'),
+(19, 'Zeph', 10, 20, 'General Goods', 'Jose', '2024-10-16 05:23:07');
 
 -- --------------------------------------------------------
 
@@ -178,6 +199,12 @@ ALTER TABLE `inventory`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `orderhistory`
+--
+ALTER TABLE `orderhistory`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `productorder`
 --
 ALTER TABLE `productorder`
@@ -206,10 +233,16 @@ ALTER TABLE `inventory`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT for table `orderhistory`
+--
+ALTER TABLE `orderhistory`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `productorder`
 --
 ALTER TABLE `productorder`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `userinfo`
