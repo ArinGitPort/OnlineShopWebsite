@@ -36,6 +36,16 @@ $sortQuery = "";
 if (isset($_POST['sortAlpha'])) {
     $sortQuery = " ORDER BY productname ASC";
 }
+
+// Sort by Category
+if (isset($_POST['sortCategory'])) {
+    $sortQuery = " ORDER BY category ASC"; // Sort by category
+}
+
+// Count total products
+$countSql = "SELECT COUNT(*) AS totalProducts FROM inventory";
+$countResult = $conn->query($countSql);
+$productCount = $countResult->fetch_assoc()['totalProducts'];
 ?>
 
 <!DOCTYPE html>
@@ -56,16 +66,18 @@ if (isset($_POST['sortAlpha'])) {
     <div class="maindisplayDiv">
         <div class="insideDisplayDiv">
             <div class="userMenuDiv">
-                <!-- Search and Sort Alphabetically Form -->
+                <!-- Search and Sort Forms -->
                 <form method="POST" action="">
+                    <span class="orderCount">Total Products: <?php echo $productCount; ?></span>
                     <input type="text" name="searchProduct" class="searchprodField" placeholder="Search Product">
                     <button type="submit" class="searchButton">Search</button>
                     <button type="submit" name="sortAlpha" class="sortAlphaButton">Sort Alphabetically</button>
+                    <button type="submit" name="sortCategory" class="sortAlphaButton">Sort by Category</button> <!-- New Sort Category Button -->
                 </form>
 
                 <!-- Add Product Button -->
                 <div class="button-container">
-                    <button type="button" class="addnewOrder" onclick="window.location.href='inventoryaddeditem.php';">Add New Product</button>
+                    <button type="button" class="sortAlphaButton" onclick="window.location.href='inventoryaddeditem.php';">Add New Product</button>
                 </div>
             </div>
 
@@ -76,7 +88,7 @@ if (isset($_POST['sortAlpha'])) {
                         <th>Product</th>
                         <th>QTY</th>
                         <th>Price</th>
-                        <th>Category</th> <!-- New Category Column -->
+                        <th>Category</th>
                         <th>Action</th>
                     </tr>
                     <?php

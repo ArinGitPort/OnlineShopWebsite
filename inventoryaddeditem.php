@@ -47,11 +47,6 @@ $conn->close();
             margin-top: 20px;
         }
 
-        .addnewProduct, .productbackButton {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
     </style>
 </head>
 
@@ -61,13 +56,13 @@ $conn->close();
         <div class="addinputField">
             <h2>Add New Product</h2>
             <label for="newProduct">Product Name</label>
-            <input class="prodnameField" type="text" id="newProduct" name="newProduct" placeholder="Product Name" required>
+            <input class="prodcategoryField" type="text" id="newProduct" name="newProduct" placeholder="Product Name" required>
 
             <label for="newQty">Quantity</label>
-            <input class="prodqtyField" type="number" id="newQty" name="newQty" placeholder="Quantity" required min="1">
+            <input class="prodcategoryField" type="number" id="newQty" name="newQty" placeholder="Quantity" required min="1">
 
             <label for="newPrice">Price</label>
-            <input class="prodpriceField" type="number" step="0.01" id="newPrice" name="newPrice" placeholder="Price" required min="0.01">
+            <input class="prodcategoryField" type="number" step="0.01" id="newPrice" name="newPrice" placeholder="Price" required min="0.01">
 
             <!-- Category Dropdown -->
             <label for="newCategory">Category</label>
@@ -92,8 +87,8 @@ $conn->close();
 
             <!-- Button Container -->
             <div class="button-container">
-                <button type="submit" name="addProduct" class="addnewProduct">Add Product</button>
-                <button type="button" class="productbackButton" onclick="window.location.href='inventory.php';">Back</button>
+                <button type="submit" class="sortAlphaButton" name="addProduct" class="addnewProduct">Add Product</button>
+                <button type="button" class="sortAlphaButton" onclick="window.location.href='inventory.php';">Back</button>
             </div>
         </div>
     </form>

@@ -18,14 +18,22 @@ if (isset($_POST['searchProduct'])) {
 $sortQuery = "";
 if (isset($_POST['sortAlpha'])) {
     $sortQuery = " ORDER BY productname ASC";
+} elseif (isset($_POST['sortCategory'])) { // New sorting condition for category
+    $sortQuery = " ORDER BY category ASC"; // Sort by category
 }
 
 // Fetch items with the search and sorting
 $sql = "SELECT id, productname, qty, price, category, customername, dateadded FROM productorder" . $searchQuery . $sortQuery;
 $result = $conn->query($sql);
 
-// Count the number of products found
+// Count the number of products found after the search
 $productCount = $result->num_rows;
+
+// Count the total number of products in the table (no filter applied)
+$totalCountQuery = "SELECT COUNT(*) AS total FROM productorder";
+$totalCountResult = $conn->query($totalCountQuery);
+$totalCountRow = $totalCountResult->fetch_assoc();
+$totalOrders = $totalCountRow['total'];
 
 // Handle deletion
 if (isset($_POST['delete'])) {
@@ -80,11 +88,11 @@ if (isset($_POST['delete'])) {
             <div class="userMenuDiv">
                 <!-- Search and Sort Alphabetically Form -->
                 <form method="POST" action="">
-                    <span class="orderCount">Total Orders: <?php echo $productCount; ?></span>
-                    <input type="text" name="searchProduct" class="ordersearchProduct"
-                        placeholder="Search Product or Customer">
+                    <span class="orderCount">Total Orders: <?php echo $totalOrders; ?></span> <!-- Display total orders -->
+                    <input type="text" name="searchProduct" class="ordersearchProduct" placeholder="Search Product or Customer">
                     <button type="submit" class="searchButton">Search</button>
                     <button type="submit" name="sortAlpha" class="sortAlphaButton">Sort Alphabetically</button>
+                    <button type="submit" name="sortCategory" class="sortAlphaButton">Sort by Category</button> <!-- New button for sorting by category -->
                 </form>
 
                 <!-- Link to Add Order Form -->
@@ -144,7 +152,7 @@ if (isset($_POST['delete'])) {
 
     <script>
         function confirmDelete() {
-            return confirm('Are you sure you want to delete this order?'); // Only this confirmation is shown
+            return confirm('Are you sure you want to mark this order as completed?'); // Only this confirmation is shown
         }
     </script>
 

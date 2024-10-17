@@ -17,7 +17,7 @@
     <div class="maindisplayDiv2">
         <div class="insideDisplayDiv2">
             <!-- Title above the slideshow -->
-            <h2 class="slideshow-title">WELCOME TO BUNNIWINKLE</h2>
+            <h2 class="slideshow-title">WELCOME TO BUNNIWINKLE INVENTORY SYSTEM</h2>
 
             <!-- Slideshow container -->
             <div class="slideshow-container">
