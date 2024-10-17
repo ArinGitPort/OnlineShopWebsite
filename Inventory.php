@@ -11,7 +11,7 @@ if ($conn->connect_error) {
 if (isset($_POST['delete'])) {
     $deleteID = $_POST['delete_id'];
 
-    $sql = "INSERT INTO deleteditem (id, deletedproduct) SELECT id, productname FROM inventory WHERE id=$deleteID";
+    $sql = "INSERT INTO deleteditem (id, deletedproduct, qty, price, category) SELECT id, productname, qty, price, category FROM inventory WHERE id=$deleteID";
     $conn->query($sql);
     $sql = "DELETE FROM inventory WHERE id=$deleteID";
     if ($conn->query($sql) === TRUE) {

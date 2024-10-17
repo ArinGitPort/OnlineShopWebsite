@@ -41,6 +41,9 @@ $deletedItemsResult = $conn->query($deletedItemsSql);
                     <tr>
                         <th>ID</th>
                         <th>Deleted Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Category</th>
                         <th>Date Deleted</th>
 
                     </tr>
@@ -50,6 +53,9 @@ $deletedItemsResult = $conn->query($deletedItemsSql);
                             echo "<tr>
                                 <td>" . $row['id'] . "</td>
                                 <td>" . $row['deletedproduct'] . "</td>
+                                <td>" . $row['qty'] . "</td>
+                                <td>" . $row['price'] . "</td>
+                                <td>" . $row['category'] . "</td>
                                 <td>" . $row['datedeleted'] . "</td>
                               </tr>";
                         }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2024 at 05:20 PM
+-- Generation Time: Oct 17, 2024 at 05:37 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -45,6 +45,9 @@ CREATE TABLE `addeditem` (
 CREATE TABLE `deleteditem` (
   `id` int(11) NOT NULL,
   `deletedproduct` varchar(80) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `price` decimal(65,2) NOT NULL,
+  `category` varchar(100) NOT NULL,
   `datedeleted` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -161,7 +164,7 @@ ALTER TABLE `addeditem`
 -- AUTO_INCREMENT for table `deleteditem`
 --
 ALTER TABLE `deleteditem`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `inventory`
