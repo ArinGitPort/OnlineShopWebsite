@@ -7,34 +7,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Add new item to the inventory and addeditem tables
-if (isset($_POST['addItem'])) {
-    $newProduct = $conn->real_escape_string($_POST['newProduct']);
-    $newQty = (int) $_POST['newQty'];
-    $newPrice = (float) $_POST['newPrice'];
-    $newCategory = $conn->real_escape_string($_POST['newCategory']); // New Category Field
-
-    // Insert into the inventory table with category
-    $sql = "INSERT INTO inventory (productname, qty, price, category) VALUES ('$newProduct', $newQty, $newPrice, '$newCategory')";
-    if ($conn->query($sql) === TRUE) {
-        // Get the last inserted ID from the inventory table
-        $lastInsertedID = $conn->insert_id;
-
-        // Insert the new product into the addeditem table
-        $sqlAdded = "INSERT INTO addeditem (id, productname, qty, price, category) VALUES ($lastInsertedID, '$newProduct', $newQty, $newPrice, '$newCategory')";
-
-        if ($conn->query($sqlAdded) === TRUE) {
-            // Redirect to prevent form resubmission
-            header("Location: " . $_SERVER['PHP_SELF']);
-            exit;
-        } else {
-            echo "Error adding to addeditem: " . $conn->error;
-        }
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-}
-
 // Soft delete and move to deleteditem table
 if (isset($_POST['delete'])) {
     $deleteID = $_POST['delete_id'];
@@ -91,39 +63,10 @@ if (isset($_POST['sortAlpha'])) {
                     <button type="submit" name="sortAlpha" class="sortAlphaButton">Sort Alphabetically</button>
                 </form>
 
-                <!-- Add Item Form -->
-                <form method="POST" action="">
-                    <div class="addinputField">
-                        <input class="prodnameField" type="text" name="newProduct" placeholder="Product Name" required>
-                        <input class="prodqtyField" type="number" name="newQty" placeholder="Quantity" required min="0">
-                        <input class="prodpriceField" type="number" step="0.01" name="newPrice" placeholder="Price"
-                            required min="0">
-
-
-                        <!-- This shi breaks when adding div -->
-                        <select name="newCategory" id="newCategory" class="prodcategoryField" required>
-                            <option value="General Goods">General Goods</option>
-                            <option value="Bunni Charms">Bunni Charms</option>
-                            <option value="Phone Strap / Bag Charms">Phone Strap / Bag Charms</option>
-                            <option value="Bunni Dolls">Bunni Dolls</option>
-                            <option value="Clay Earrings">Clay Earrings</option>
-                            <option value="Clay Bracelets">Clay Bracelets</option>
-                            <option value="Clay Necklace">Clay Necklace</option>
-                            <option value="Clay Pins">Clay Pins</option>
-                            <option value="Deco Stickers">Deco Stickers</option>
-                            <option value="Notepads">Notepads</option>
-                            <option value="Sticker Set">Sticker Set</option>
-                            <option value="Sticker Pack">Sticker Pack</option>
-                            <option value="Acrylic Keychain">Acrylic Keychain</option>
-                            <option value="Washi Tapes">Washi Tapes</option>
-                            <option value="Clear Stamps">Clear Stamps</option>
-                            <option value="Boxes and Bundles">Boxes and Bundles</option>
-                        </select>
-
-
-                        <button type="submit" name="addItem" class="addButton">Add Item</button>
-                    </div>
-                </form>
+                <!-- Add Product Button -->
+                <div class="button-container">
+                    <button type="button" class="addnewOrder" onclick="window.location.href='inventoryaddeditem.php';">Add New Product</button>
+                </div>
             </div>
 
             <div class="tableContainer">
@@ -148,7 +91,7 @@ if (isset($_POST['sortAlpha'])) {
                                 <td>" . $row['productname'] . "</td>
                                 <td>" . $row['qty'] . "</td>
                                 <td>" . $row['price'] . "</td>
-                                <td>" . $row['category'] . "</td> <!-- Display Category -->
+                                <td>" . $row['category'] . "</td>
                                 <td>
                                     <form method='POST' action='' onsubmit='return confirmDelete();'>
                                         <input type='hidden' name='delete_id' value='" . $row['id'] . "'>
