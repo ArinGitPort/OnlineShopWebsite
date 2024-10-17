@@ -100,12 +100,12 @@ body {
     display: none;
     position: absolute;
     background-color: #97ada3;
-    width: 180px; /* Set the width to the desired size */
-    height: 130px; /* Automatically adjust height based on content */
+    width: 200px; /* Set the width to the desired size */
+    height: 140px; /* Automatically adjust height based on content */
     z-index: 1;
     padding: 10px; /* Add padding for spacing inside the dropdown */
     margin: 0;
-    left: 230px; /* Adjust left value as needed */
+    left: 314px; /* Adjust left value as needed */
     border: 2px solid #354359; /* Add a border */
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.6); /* Add a box shadow for better visibility */
     border-radius: 5px; /* Optionally, add rounded corners */
