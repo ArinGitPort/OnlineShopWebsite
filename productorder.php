@@ -24,21 +24,24 @@ if (isset($_POST['sortAlpha'])) {
 $sql = "SELECT id, productname, qty, price, category, customername, dateadded FROM productorder" . $searchQuery . $sortQuery;
 $result = $conn->query($sql);
 
+// Count the number of products found
+$productCount = $result->num_rows;
+
 // Handle deletion
 if (isset($_POST['delete'])) {
     $delete_id = intval($_POST['delete_id']);
-    
+
     // Fetch the item details to be deleted
     $itemSql = "SELECT productname, qty, price, category, customername, dateadded FROM productorder WHERE id = $delete_id";
     $itemResult = $conn->query($itemSql);
-    
+
     if ($itemResult->num_rows > 0) {
         $itemRow = $itemResult->fetch_assoc();
-        
+
         // Insert the item into orderhistory before deleting
         $insertHistorySql = "INSERT INTO orderhistory (productname, qty, price, category, customername, datecompleted) 
                              VALUES ('" . $itemRow['productname'] . "', " . $itemRow['qty'] . ", " . $itemRow['price'] . ", '" . $itemRow['category'] . "', '" . $itemRow['customername'] . "', NOW())";
-        
+
         if ($conn->query($insertHistorySql) === TRUE) {
             // Now delete the item from productorder
             $deleteSql = "DELETE FROM productorder WHERE id = $delete_id";
@@ -77,7 +80,9 @@ if (isset($_POST['delete'])) {
             <div class="userMenuDiv">
                 <!-- Search and Sort Alphabetically Form -->
                 <form method="POST" action="">
-                    <input type="text" name="searchProduct" class="ordersearchProduct" placeholder="Search Product or Customer">
+                    <span class="orderCount">Total Orders: <?php echo $productCount; ?></span>
+                    <input type="text" name="searchProduct" class="ordersearchProduct"
+                        placeholder="Search Product or Customer">
                     <button type="submit" class="searchButton">Search</button>
                     <button type="submit" name="sortAlpha" class="sortAlphaButton">Sort Alphabetically</button>
                 </form>
@@ -104,7 +109,7 @@ if (isset($_POST['delete'])) {
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             // Calculate total price for the row
-                            $totalPrice = $row['qty'] * $row['price']; 
+                            $totalPrice = $row['qty'] * $row['price'];
                             echo "<tr>
                                 <td>" . $row['id'] . "</td>
                                 <td>" . $row['productname'] . "</td>
@@ -138,11 +143,10 @@ if (isset($_POST['delete'])) {
     </div>
 
     <script>
-    function confirmDelete() {
-        return confirm('Are you sure you want to delete this order?'); // Only this confirmation is shown
-    }
-</script>
-
+        function confirmDelete() {
+            return confirm('Are you sure you want to delete this order?'); // Only this confirmation is shown
+        }
+    </script>
 
 </body>
 

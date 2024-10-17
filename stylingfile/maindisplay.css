@@ -158,6 +158,11 @@ body {
   border-color: #354359;
 }
 
+.orderCount{
+  font-size: large;
+  margin-right: 70px;
+}
+
 .searchprodField:hover {
   background-color: white;
   box-shadow: 0 0 6px rgba(22, 73, 139, 0.671);
