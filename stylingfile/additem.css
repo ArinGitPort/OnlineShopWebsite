@@ -1,5 +1,6 @@
 body {
-  background-color: rgb(255, 224, 229);
+  background: rgb(247,190,215);
+background: radial-gradient(circle, rgba(247,190,215,0.8932365182401085) 5%, rgba(180,214,255,1) 91%); 
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
@@ -29,7 +30,7 @@ h2{
   box-shadow: 0 0 10px rgba(21, 26, 35, 0.5);
   width: 300px;
   padding: 20px;
-  background-color: #97ada3;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .addinputField h2 {
