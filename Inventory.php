@@ -11,11 +11,25 @@ if ($conn->connect_error) {
 if (isset($_POST['delete'])) {
     $deleteID = $_POST['delete_id'];
 
-    $sql = "INSERT INTO deleteditem (id, deletedproduct, qty, price, category) SELECT id, productname, qty, price, category FROM inventory WHERE id=$deleteID";
+    // Insert deleted product into 'deleteditem' table
+    $sql = "INSERT INTO deleteditem (id, deletedproduct, qty, price, category) 
+            SELECT id, productname, qty, price, category 
+            FROM inventory WHERE id=$deleteID";
     $conn->query($sql);
+
+    // Delete product from 'inventory' table
     $sql = "DELETE FROM inventory WHERE id=$deleteID";
     if ($conn->query($sql) === TRUE) {
-        echo "<script>alert('Item deleted successfully!');</script>";
+        // Re-sequence IDs after deletion
+        $resequenceSql = "SET @count = 0;
+                          UPDATE inventory SET id = @count:= @count + 1;
+                          ALTER TABLE inventory AUTO_INCREMENT = 1;";
+        
+        if ($conn->multi_query($resequenceSql) === TRUE) {
+            echo "<script>alert('Item deleted and IDs resequenced successfully!');</script>";
+        } else {
+            echo "<script>alert('Error re-sequencing IDs: " . $conn->error . "');</script>";
+        }
     } else {
         echo "<script>alert('Error deleting item: " . $conn->error . "');</script>";
     }
@@ -28,7 +42,8 @@ if (isset($_POST['delete'])) {
 $searchQuery = "";
 if (isset($_POST['searchProduct'])) {
     $searchProduct = addslashes($_POST['searchProduct']);
-    $searchQuery = " WHERE productname LIKE '%$searchProduct%'";
+    // Search in both 'id' and 'productname'
+    $searchQuery = " WHERE productname LIKE '%$searchProduct%' OR id LIKE '%$searchProduct%'";
 }
 
 // Sort Alphabetically

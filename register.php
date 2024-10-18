@@ -47,19 +47,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $conn->close();
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="stylingfile/register.css">
     <link rel="icon" href="iconlogo/bunniwinkleIcon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <style>
+        .tooltip {
+            color: red; /* Tooltip text color */
+            font-size: 12px; /* Font size */
+            margin-left: 5px; /* Spacing from the input */
+        }
+    </style>
 </head>
+
 <body>
     <div class="registerBoxContainer">
-        <div class="registerHeader"><h2>Register</h2></div>
+        <div class="registerHeader">
+            <h2>Register</h2>
+        </div>
         <form method="POST" action="">
             <div class="registerForm">
                 <label>Username</label><br>
@@ -69,14 +79,43 @@ $conn->close();
                 <input type="password" name="password" class="passwordBox" required><br><br>
 
                 <label>Email</label><br>
-                <input type="email" name="email" required><br><br>
-                
+                <input type="email" name="email" class="emailbox" required onfocus="showTooltip(this)" onblur="hideTooltip(this)">
+                <span class="tooltip" style="display: none; margin-top:10px;">Please remember your email for recovery!</span><br><br>
+
                 <div class="registerButton">
-                <input type="submit" value="Register" class="loginButton">
-                <input type="button" value="Back" onclick="location.href='login.php';" class="loginButton">
+                    <input type="submit" value="Register" class="loginButton">
+                    <input type="button" value="Back" onclick="location.href='login.php';" class="loginButton">
                 </div>
             </div>
         </form>
     </div>
+
+    <script>
+        // Show tooltip on focus or hover
+        function showTooltip(input) {
+            const tooltip = input.nextElementSibling; // Get the next sibling (the span)
+            tooltip.style.display = "inline"; // Show the tooltip
+        }
+
+        // Hide tooltip when focus is lost
+        function hideTooltip(input) {
+            const tooltip = input.nextElementSibling; // Get the next sibling (the span)
+            tooltip.style.display = "none"; // Hide the tooltip
+        }
+
+        // Add event listeners for hover
+        const emailInput = document.querySelector('input[name="email"]');
+        const tooltip = emailInput.nextElementSibling;
+
+        emailInput.addEventListener('mouseenter', () => {
+            tooltip.style.display = "inline"; // Show on hover
+        });
+
+        emailInput.addEventListener('mouseleave', () => {
+            if (document.activeElement !== emailInput) { // Hide only if not focused
+                tooltip.style.display = "none"; // Hide on mouse leave
+            }
+        });
+    </script>
 </body>
 </html>

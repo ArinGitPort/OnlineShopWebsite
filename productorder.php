@@ -12,8 +12,10 @@ if ($conn->connect_error) {
 $searchQuery = "";
 if (isset($_POST['searchProduct'])) {
     $searchProduct = addslashes($_POST['searchProduct']);
-    $searchQuery = " WHERE productname LIKE '%$searchProduct%' OR customername LIKE '%$searchProduct%'";
+    $searchQuery = " WHERE productname LIKE '%$searchProduct%' OR customername LIKE '%$searchProduct%' OR id LIKE '%$searchProduct%'";
 }
+
+
 
 $sortQuery = "";
 if (isset($_POST['sortAlpha'])) {
@@ -36,6 +38,7 @@ $totalCountRow = $totalCountResult->fetch_assoc();
 $totalOrders = $totalCountRow['total'];
 
 // Handle deletion
+// Handle deletion
 if (isset($_POST['delete'])) {
     $delete_id = intval($_POST['delete_id']);
 
@@ -54,8 +57,18 @@ if (isset($_POST['delete'])) {
             // Now delete the item from productorder
             $deleteSql = "DELETE FROM productorder WHERE id = $delete_id";
             if ($conn->query($deleteSql) === TRUE) {
-                // No success alert here
-                echo "<script>window.location.href = window.location.href;</script>"; // Just refresh the page
+
+                // Re-sequence the IDs after deletion
+                $resequenceSql = "SET @count = 0;
+                                  UPDATE productorder SET id = @count:= @count + 1;
+                                  ALTER TABLE productorder AUTO_INCREMENT = 1;";
+                
+                if ($conn->multi_query($resequenceSql) === TRUE) {
+                    echo "<script>window.location.href = window.location.href;</script>"; // Refresh the page
+                } else {
+                    echo "<script>alert('Error re-sequencing IDs: " . $conn->error . "');</script>";
+                }
+
             } else {
                 echo "<script>alert('Error deleting order: " . $conn->error . "');</script>";
             }
@@ -64,6 +77,8 @@ if (isset($_POST['delete'])) {
         }
     }
 }
+
+
 
 ?>
 

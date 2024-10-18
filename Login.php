@@ -74,7 +74,13 @@ $conn->close(); // Close connection
       </div>
       <div class="loginInfoDiv">
         <input name="usernameInp" class="usernameBox" type="text" placeholder="Username" required><br>
-        <input name="passwordInp" class="passwordBox" type="password" placeholder="Password" required>
+        <input name="passwordInp" id="passwordInp" class="passwordBox" type="password" placeholder="Password" required><br>
+        <!-- Show Password Checkbox -->
+      </div>
+      <!-- Forgot Password Link -->
+      <div class="forgotShowPasswordDiv">
+      <input type="checkbox" id="showPassword" onclick="togglePassword()" class="togglepass"> Show Password
+        <a href="forgotpass.php" class="forgotPassLink" >Forgot Password?</a>
       </div>
       <div class="loginButtonDiv">
         <button type="submit" class="loginButton">Log In</button>
@@ -82,5 +88,17 @@ $conn->close(); // Close connection
       </div>
     </form>
   </div>
+
+  <!-- JavaScript to toggle password visibility -->
+  <script>
+    function togglePassword() {
+      var passwordInput = document.getElementById("passwordInp");
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+      } else {
+        passwordInput.type = "password";
+      }
+    }
+  </script>
 </body>
 </html>
