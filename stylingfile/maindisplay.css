@@ -79,13 +79,24 @@ body {
 
 .searchprodField {
   background-color: white;
-  border: solid 1px;
   width: 150px;
   margin: 10px;
   font-size: 20px;
+  border: none;
   outline: none;
-  border-radius: 12px;
-  transition: all 0.3s ease;
+  border-radius: 8px;
+  background-color: #ccc;
+  box-shadow: inset 2px 5px 10px rgba(0,0,0,0.3);
+  transition: 300ms ease-in-out;
+}
+
+
+.searchprodField:hover {
+  background-color: white;
+  transform: scale(1.05);
+  box-shadow: 13px 13px 100px #969696,
+             -13px -13px 100px #ffffff;
+
 }
 
 .prodnameField {
@@ -169,12 +180,7 @@ body {
   margin-right: 70px;
 }
 
-.searchprodField:hover {
-  background-color: white;
-  box-shadow: 0 0 6px rgba(22, 73, 139, 0.671);
-  transform: scale(1.1);
-  border-color: #354359;
-}
+
 
 .searchButton {
   color: white;
