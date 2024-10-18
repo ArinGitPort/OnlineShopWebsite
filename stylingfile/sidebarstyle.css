@@ -5,7 +5,8 @@ body {
 .dashboardContainer {
   display: inline-block;
   width: 18%;
-  background-color: #c2dcf3;
+  background: rgb(255,219,254);
+background: linear-gradient(0deg, rgba(255,219,254,1) 3%, rgba(200,226,246,1) 48%);
   border: solid 1px;
   border-color: #354359;
   box-shadow: 0 0 6px rgb(0, 0, 0, 1);
@@ -23,14 +24,14 @@ body {
 
 .inventoryLabel {
   font-weight: bolder;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   font-size: 30px;
   color: black;
   padding-bottom: 20px;
   border-bottom: solid 2px;
   border-color: #354359;
 }
-
 
 .userIcon {
   width: 70%;
@@ -58,7 +59,8 @@ body {
   text-decoration: none;
   color: white;
   font-weight: bold;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   transition: all 0.3s ease;
 }
 
@@ -71,6 +73,8 @@ body {
   padding: 5px;
   transition: all 0.3s ease;
 }
+
+
 
 /* Icon Styles */
 .imgIcon {
@@ -97,41 +101,60 @@ body {
 
 /* Dropdown Menu Styles */
 .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #c2dcf3;
-    width: 200px; /* Set the width to the desired size */
-    height: 140px; /* Automatically adjust height based on content */
-    z-index: 1;
-    padding: 10px; /* Add padding for spacing inside the dropdown */
-    margin: 0;
-    left: 305px; /* Adjust left value as needed */
-    border: 2px solid #354359; /* Add a border */
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.6); /* Add a box shadow for better visibility */
-    border-radius: 5px; /* Optionally, add rounded corners */
+  display: none;
+  position: absolute;
+  background-color: #c2dcf3;
+  width: 200px; /* Set the width to the desired size */
+  height: 140px; /* Automatically adjust height based on content */
+  z-index: 1;
+  padding: 10px; /* Add padding for spacing inside the dropdown */
+  margin: 0;
+  left: 305px; /* Adjust left value as needed */
+  border: 2px solid #354359; /* Add a border */
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6); /* Add a box shadow for better visibility */
+  border-radius: 5px; /* Optionally, add rounded corners */
 }
 
 /* Dropdown items */
 .dropdown-item {
-    padding: 10px; /* Space inside the dropdown items */
-    color: white;
-    text-decoration: none;
-    display: block;
-    font-size: 18px;
-    transition: all 0.3s ease;
-    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  padding: 10px; /* Space inside the dropdown items */
+  color: white;
+  text-decoration: none;
+  display: block;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 
 /* Dropdown item hover effect */
 .dropdown-item:hover {
-    background-color: #354359; /* Highlight item on hover */
-    border-radius: 3px; /* Optional: Rounded corners for hover effect */
+  background-color: #354359; /* Highlight item on hover */
+  border-radius: 3px; /* Optional: Rounded corners for hover effect */
 }
 
 /* List item hover */
-.listDiv:hover, .dropdown-container:hover {
-    background-color: #354359;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+.listDiv:hover,
+.dropdown-container:hover {
+  background-color: #354359;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+  position: relative; /* Required for the ::after to position correctly */
 }
 
+.listDiv::after,
+.dropdown-container::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: white;
+  left: 50%;
+  bottom: 0;
+  transition: all 0.4s ease;
+}
 
+.listDiv:hover::after,
+.dropdown-container:hover::after {
+  width: 100%;
+  left: 0;
+}
