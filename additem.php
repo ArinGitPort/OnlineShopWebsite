@@ -65,10 +65,10 @@ $conn->close();
             <input class="orderprodnameField" type="text" id="newProduct" name="newProduct" placeholder="Product Name" required>
 
             <label for="newQty">Quantity</label>
-            <input class="orderprodqtyField" type="number" id="newQty" name="newQty" placeholder="Quantity" required>
+            <input class="orderprodqtyField" type="number" id="newQty" name="newQty" placeholder="Quantity" required min="0">
 
             <label for="newPrice">Price</label>
-            <input class="orderprodpriceField" type="number" step="0.01" id="newPrice" name="newPrice" placeholder="Price" required>
+            <input class="orderprodpriceField" type="number" step="0.01" id="newPrice" name="newPrice" placeholder="Price" required min="0">
 
             <!-- Category Dropdown -->
             <label for="newCategory">Category</label>

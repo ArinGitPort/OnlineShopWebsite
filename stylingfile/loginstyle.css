@@ -1,5 +1,7 @@
 body {
-  background-color: lightblue; /* Change to any color you prefer */
+  background-color: lightblue; 
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 
 .loginBoxContainer {
