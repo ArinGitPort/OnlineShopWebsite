@@ -28,6 +28,12 @@
                     <a href="inventory.php" class="menuDashboard">PRODUCTS</a>
                 </div>
             </li>
+            <li>
+                <div class="listDiv">
+                    <img src="iconlogo/trend.png" class="imgIcon">
+                    <a href="graph.php" class="menuDashboard">GRAPH</a>
+                </div>
+            </li>
             <li class="dropdown">
                 <div class="listDiv dropdown-container">
                     <img src="iconlogo/history.png" class="imgIcon">
