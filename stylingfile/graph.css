@@ -37,4 +37,12 @@ body {
 }
 
 
+h2{
+    border: solid 2px #354359;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 0 6px rgba(21, 26, 35, 1);
+    background-color: #354359;
+    color: white;
 
+}
