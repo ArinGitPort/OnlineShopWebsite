@@ -34,6 +34,7 @@ if (isset($_POST['delete'])) {
         echo "<script>alert('Error deleting item: " . $conn->error . "');</script>";
     }
 
+    // Redirect to refresh the page
     header("Location: " . $_SERVER['PHP_SELF']);
     exit;
 }
@@ -62,6 +63,7 @@ $countSql = "SELECT COUNT(*) AS totalProducts FROM inventory";
 $countResult = $conn->query($countSql);
 $productCount = $countResult->fetch_assoc()['totalProducts'];
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -122,11 +124,11 @@ $productCount = $countResult->fetch_assoc()['totalProducts'];
                                 <td>
                                     <form method='POST' action='' onsubmit='return confirmDelete();'>
                                         <input type='hidden' name='delete_id' value='" . $row['id'] . "'>
-                                        <button class='deletetableButton' type='submit' name='delete'>Delete</button>
+                                        <button class='deletetableButton' type='submit' name='delete'>Make Unavailable</button>
                                     </form>
                                     <form method='GET' action='edititem.php'>
                                         <input type='hidden' name='edit_id' value='" . $row['id'] . "'>
-                                        <button class='edittableButton' type='submit' name='edit'>Edit</button>
+                                        <button class='edittableButton' type='submit' name='edit'>Edit Product</button>
                                     </form>
                                 </td>
                               </tr>";

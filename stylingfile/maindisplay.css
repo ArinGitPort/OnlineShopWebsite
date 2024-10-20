@@ -4,6 +4,10 @@ body {
     "Lucida Sans", Arial, sans-serif;
 }
 
+th{
+  background-color: #6b9ae747;
+}
+
 .maindisplayDiv {
   border: solid 1px;
   border-color: #354359;

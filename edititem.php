@@ -58,7 +58,7 @@ $conn->close();
         <label>Price</label><br>
         <input type="number" name="price" value="<?php echo $row['price']; ?>" required><br><br>
         <div class="editformButton">
-        <input class="updateButton" type="submit" value="Update">
+        <input class="updateButton" type="submit" value="Update Product">
         <input class="backButton" type="button" name="goback" value="Back" onclick="location.href='Inventory.php';">
     </form>
     </div>

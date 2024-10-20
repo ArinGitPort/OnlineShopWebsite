@@ -49,7 +49,7 @@ $conn->close();
 <body>
     
     <div class="editprodContainer2">
-        <h2>Edit Product Order</h2>
+        <h2>Edit Order</h2>
         <div class="editForm">
             <form method="POST" action="">
                 <label>Product Name</label><br>
@@ -62,12 +62,13 @@ $conn->close();
                 <input type="text" name="category" value="<?php echo $row['category']; ?>" required><br><br>
                 <label>Customer Name</label><br>
                 <input type="text" name="customername" value="<?php echo $row['customername']; ?>" required><br><br>
+                </div>
                 <div class="editformButton">
-                    <input class="updateButton" type="submit" value="Update">
+                    <input class="updateButton" type="submit" value="Update Order">
                     <input class="backButton" type="button" name="goback" value="Back" onclick="location.href='productorder.php';">
                 </div>
             </form>
-        </div>
+        
     </div>
 </body>
 

@@ -34,7 +34,7 @@ $deletedItemsResult = $conn->query($deletedItemsSql);
     <div class="maindisplayDiv">
         <div class="insideTabelDisplayDiv">
             <div class="historylabelDiv">
-                <h2 class="historyLabel">Deleted Items</h2>
+                <h2 class="historyLabel">Unavailable Products</h2>
             </div>
             <div class="tableWrap">
                 <table class="historyTable">
@@ -60,7 +60,7 @@ $deletedItemsResult = $conn->query($deletedItemsSql);
                               </tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='2'>No deleted items found</td></tr>";
+                        echo "<tr><td colspan='2'>No Unavailable Product Found</td></tr>";
                     }
                     ?>
                 </table>

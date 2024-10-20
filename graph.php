@@ -16,9 +16,7 @@ if ($result->num_rows > 0) {
         $categories[] = $row['category'];
         $totals[] = $row['total'];
     }
-} else {
-    echo "No data found!";
-}
+} 
 
 $conn->close();
 ?>
@@ -30,7 +28,7 @@ $conn->close();
     <link rel="stylesheet" href="stylingfile/graph.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Most Ordered by Category</title>
+    <title>Most Ordered Products by Category</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -39,7 +37,7 @@ $conn->close();
 
     <div class="graphContainer">
         <div class="h2Div">
-            <h2>Most Ordered by Category</h2>
+            <h2>Most Ordered Products by Category</h2>
         </div>
         <div style="width: 50%; margin: auto;">
             <canvas id="orderChart"></canvas>
@@ -54,11 +52,11 @@ $conn->close();
         // Initialize the chart
         var ctx = document.getElementById('orderChart').getContext('2d');
         var chart = new Chart(ctx, {
-            type: 'pie',
+            type: 'bar',
             data: {
                 labels: categories,
                 datasets: [{
-                    label: 'Completed Orders by Category',
+                    label: 'Total Orders',
                     data: totals,
                     backgroundColor: [
                         'rgb(255, 99, 132)',

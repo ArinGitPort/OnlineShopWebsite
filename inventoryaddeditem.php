@@ -14,21 +14,31 @@ if (isset($_POST['addProduct'])) {
     $newPrice = (float) $_POST['newPrice'];
     $newCategory = $conn->real_escape_string($_POST['newCategory']); // Category field
 
-    // Insert into the inventory table
-    $sql = "INSERT INTO inventory (productname, qty, price, category) 
-            VALUES ('$newProduct', $newQty, $newPrice, '$newCategory')";
+    // Check if product name already exists
+    $checkDuplicateSql = "SELECT * FROM inventory WHERE productname='$newProduct'";
+    $duplicateResult = $conn->query($checkDuplicateSql);
 
-    if ($conn->query($sql) === TRUE) {
-        // Redirect to the main page after adding the product
-        header("Location: inventory.php");
-        exit;
+    if ($duplicateResult->num_rows > 0) {
+        // Product name exists, show an error message
+        echo "<script>alert('Error: Product name already exists.');</script>";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        // Insert into the inventory table if no duplicate
+        $sql = "INSERT INTO inventory (productname, qty, price, category) 
+                VALUES ('$newProduct', $newQty, $newPrice, '$newCategory')";
+
+        if ($conn->query($sql) === TRUE) {
+            // Redirect to the main page after adding the product
+            header("Location: inventory.php");
+            exit;
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
     }
 }
 
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
