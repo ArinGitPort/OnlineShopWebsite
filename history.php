@@ -1,4 +1,8 @@
-<a?php
+<?php
+
+include 'sessionchecker.php';
+
+
 session_start();
 $conn = new mysqli("localhost", "root", "", "logindb");
 

@@ -1,5 +1,5 @@
 <?php
-session_start();
+include 'sessionchecker.php';
 $conn = new mysqli("localhost", "root", "", "logindb");
 
 // Check connection
@@ -42,7 +42,7 @@ $deletedItemsResult = $conn->query($deletedItemsSql);
                         <th>ID</th>
                         <th>Product Name</th>
                         <th>Quantity</th>
-                        <th>Price</th>
+                        <th>Price Per Piece</th>
                         <th>Date Added</th>
                     </tr>
                     <?php

@@ -1,5 +1,6 @@
 <?php
-session_start(); // Start the session at the very top of the file
+include 'sessionchecker.php';
+
 
 $conn = new mysqli("localhost", "root", "", "logindb");
 

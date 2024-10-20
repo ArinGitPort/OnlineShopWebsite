@@ -99,7 +99,7 @@ background: linear-gradient(0deg, rgba(255,219,254,1) 3%, rgba(200,226,246,1) 48
   display: flex; /* Ensures icon and text align as in regular items */
   align-items: center;
   width: 100%;
-  height: 40px; /* Matches height of regular items */
+  height: 45px; /* Matches height of regular items */
   padding: 5px;
   transition: all 0.3s ease;
 }
@@ -109,7 +109,7 @@ background: linear-gradient(0deg, rgba(255,219,254,1) 3%, rgba(200,226,246,1) 48
   display: none;
   position: absolute;
   background-color: #c2dcf3;
-  width: 200px; /* Set the width to the desired size */
+  width: 230px; /* Set the width to the desired size */
   height: 140px; /* Automatically adjust height based on content */
   z-index: 1;
   padding: 10px; /* Add padding for spacing inside the dropdown */

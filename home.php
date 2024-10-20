@@ -1,3 +1,8 @@
+<?php
+
+include 'sessionchecker.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,9 +22,9 @@
     <div class="maindisplayDiv2">
         <div class="insideDisplayDiv2">
             <!-- Title above the slideshow -->
-             
+
             <h2 class="slideshow-title">WELCOME TO BUNNIWINKLE INVENTORY SYSTEM</h2>
-            
+
             <!-- Slideshow container -->
             <div class="slideshow-container">
 
@@ -41,7 +46,8 @@
                     <img src="imgBG/bunniartscraft.jpg" class="slideshow-image">
                     <div class="text"></div>
                 </div>
-                <p class="introducePara">Welcome to bunniwinkle inventory system app. The goal of this app is to make monitoring of orders and products easier. </p>
+                <p class="introducePara">Welcome to bunniwinkle inventory system app. The goal of this app is to make
+                    monitoring of orders and products easier. </p>
 
                 <!-- Next and previous buttons -->
                 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>

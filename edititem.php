@@ -51,6 +51,7 @@ $conn->close();
     <h2>Edit Product</h2>
     <div class="editForm">
     <form method="POST" action="">
+        <div class="editForm2">
         <label>Product Name</label><br>
         <input type="text" name="productname" value="<?php echo $row['productname']; ?>" required><br><br>
         <label>Quantity</label><br>
@@ -60,6 +61,7 @@ $conn->close();
         <div class="editformButton">
         <input class="updateButton" type="submit" value="Update Product">
         <input class="backButton" type="button" name="goback" value="Back" onclick="location.href='Inventory.php';">
+        </div>
     </form>
     </div>
     </div>

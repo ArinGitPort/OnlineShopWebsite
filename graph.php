@@ -1,4 +1,7 @@
 <?php
+include 'sessionchecker.php';
+
+
 $conn = new mysqli("localhost", "root", "", "logindb");
 if ($conn->connect_error) {
     die("Connection Failed: " . $conn->connect_error);
@@ -16,7 +19,7 @@ if ($result->num_rows > 0) {
         $categories[] = $row['category'];
         $totals[] = $row['total'];
     }
-} 
+}
 
 $conn->close();
 ?>
@@ -35,6 +38,9 @@ $conn->close();
 <body>
     <?php include 'sidebar.php' ?>
 
+
+    <!-- The rest of your page code -->
+
     <div class="graphContainer">
         <div class="h2Div">
             <h2>Most Ordered Products by Category</h2>
@@ -43,8 +49,10 @@ $conn->close();
             <canvas id="orderChart"></canvas>
         </div>
     </div>
-    
+
+
     <script>
+        //chartjs import
         // Fetch PHP data from the server
         var categories = <?php echo json_encode($categories); ?>;
         var totals = <?php echo json_encode($totals); ?>;
@@ -80,7 +88,7 @@ $conn->close();
                     },
                     title: {
                         display: true,
-                        text: 'Completed Orders by Category'
+                        text: 'Graph of Completed Orders by Category'
                     }
                 }
             }
