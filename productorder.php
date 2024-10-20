@@ -1,7 +1,6 @@
 <?php
 include 'sessionchecker.php';
 
-
 $conn = new mysqli("localhost", "root", "", "logindb");
 
 // Check connection
@@ -49,19 +48,44 @@ if (isset($_POST['delete'])) {
     }
 }
 
-// Handle order cancellation (Permanent Delete)
+// Handle order cancellation (Restock Product)
 if (isset($_POST['cancel'])) {
     $cancel_id = intval($_POST['cancel_id']);
-    $deleteSql = "DELETE FROM productorder WHERE id = $cancel_id";
-    if ($conn->query($deleteSql) === TRUE) {
-        // Resequence IDs after cancellation
-        $resequenceSql = "SET @count = 0;
-                          UPDATE productorder SET id = @count:= @count + 1;
-                          ALTER TABLE productorder AUTO_INCREMENT = 1;";
-        $conn->multi_query($resequenceSql);
-        echo "<script>window.location.href = window.location.href;</script>";
+
+    // Fetch the product details from productorder
+    $orderSql = "SELECT productname, qty FROM productorder WHERE id = $cancel_id";
+    $orderResult = $conn->query($orderSql);
+
+    if ($orderResult && $orderResult->num_rows > 0) {
+        $order = $orderResult->fetch_assoc();
+        $productName = $order['productname'];
+        $qtyToRestore = $order['qty'];
+
+        // Update the inventory table to increase the quantity
+        $updateInventorySql = "UPDATE inventory SET qty = qty + ? WHERE productname = ?";
+        $stmt = $conn->prepare($updateInventorySql);
+        $stmt->bind_param("is", $qtyToRestore, $productName);
+
+        if ($stmt->execute()) {
+            // Now delete the order from productorder
+            $deleteSql = "DELETE FROM productorder WHERE id = $cancel_id";
+            if ($conn->query($deleteSql) === TRUE) {
+                // Resequence IDs after cancellation
+                $resequenceSql = "SET @count = 0;
+                                  UPDATE productorder SET id = @count:= @count + 1;
+                                  ALTER TABLE productorder AUTO_INCREMENT = 1;";
+                $conn->multi_query($resequenceSql);
+                echo "<script>window.location.href = window.location.href;</script>";
+            } else {
+                echo "<script>alert('Error canceling order: " . $conn->error . "');</script>";
+            }
+        } else {
+            echo "<script>alert('Error updating inventory: " . $stmt->error . "');</script>";
+        }
+
+        $stmt->close();
     } else {
-        echo "<script>alert('Error canceling order: " . $conn->error . "');</script>";
+        echo "<script>alert('Order not found.');</script>";
     }
 }
 
@@ -124,7 +148,7 @@ $conn->close();
                                 <td>" . $row['price'] . "</td>
                                 <td>" . $row['category'] . "</td>
                                 <td>" . $row['customername'] . "</td>
-                                <td>" . number_format($totalPrice, 2) . "</td>
+                                <td>" . '$' . number_format($totalPrice, 2) . "</td>
                                 <td>" . $row['dateadded'] . "</td>
                                 <td>
                                     <form method='POST' action='' onsubmit='return confirmDelete();'>

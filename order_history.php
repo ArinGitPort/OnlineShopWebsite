@@ -15,6 +15,36 @@ $addedItemsResult = $conn->query($addedItemsSql);
 // Fetch completed orders from orderhistory
 $orderHistorySql = "SELECT * FROM orderhistory ORDER BY id DESC"; // LIFO: latest first
 $orderHistoryResult = $conn->query($orderHistorySql);
+
+// Revert Order
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['revertOrderId'])) {
+    $orderId = intval($_POST['revertOrderId']);
+
+    // Fetch order details
+    $fetchOrderSql = "SELECT * FROM orderhistory WHERE id = ?";
+    $stmt = $conn->prepare($fetchOrderSql);
+    $stmt->bind_param("i", $orderId);
+    $stmt->execute();
+    $order = $stmt->get_result()->fetch_assoc();
+
+    if ($order) {
+        // Restore to productorder table
+        $restoreItemSql = "INSERT INTO productorder (productname, qty, price, category, customername) VALUES (?, ?, ?, ?, ?)";
+        $restoreStmt = $conn->prepare($restoreItemSql);
+        $restoreStmt->bind_param("siiss", $order['productname'], $order['qty'], $order['price'], $order['category'], $order['customername']);
+        $restoreStmt->execute();
+
+        // Delete from orderhistory
+        $deleteOrderSql = "DELETE FROM orderhistory WHERE id = ?";
+        $deleteStmt = $conn->prepare($deleteOrderSql);
+        $deleteStmt->bind_param("i", $orderId);
+        $deleteStmt->execute();
+
+        // Optionally add success message here
+        echo "<script>alert('Order reverted successfully!'); window.location.reload();</script>";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -46,6 +76,7 @@ $orderHistoryResult = $conn->query($orderHistorySql);
                         <th>Category</th>
                         <th>Customer Name</th>
                         <th>Date Completed</th>
+                        <th>Action</th> <!-- Add Action Column -->
                     </tr>
                     <?php
                     if ($orderHistoryResult->num_rows > 0) {
@@ -58,10 +89,16 @@ $orderHistoryResult = $conn->query($orderHistorySql);
                                 <td>" . $row['category'] . "</td>
                                 <td>" . $row['customername'] . "</td>
                                 <td>" . $row['datecompleted'] . "</td>
+                                <td>
+                                    <form method='POST' style='display:inline;'>
+                                        <input type='hidden' name='revertOrderId' value='" . $row['id'] . "'>
+                                        <input class='deletetableButton' type='submit' value='Revert' onclick='return confirm(\"Are you sure you want to revert this order?\");'>
+                                    </form>
+                                </td>
                               </tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='7'>No completed orders found</td></tr>";
+                        echo "<tr><td colspan='8'>No completed orders found</td></tr>";
                     }
                     ?>
                 </table>

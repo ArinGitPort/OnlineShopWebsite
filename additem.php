@@ -7,24 +7,53 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Add new order to the order table only
+// Fetch products from inventory, including the category
+$inventorySql = "SELECT productname, price, qty, category FROM inventory"; // Include category
+$inventoryResult = $conn->query($inventorySql);
+
+// Handle form submission
 if (isset($_POST['addOrder'])) {
-    $newProduct = $conn->real_escape_string($_POST['newProduct']);
-    $newQty = (int) $_POST['newQty'];
-    $newPrice = (float) $_POST['newPrice'];
-    $newCategory = $conn->real_escape_string($_POST['newCategory']);
-    $customerName = $conn->real_escape_string($_POST['customerName']); // New Customer Name Field
+    $selectedProduct = $conn->real_escape_string($_POST['productDropdown']);
+    $newQty = (int)$_POST['newQty'];
+    $customerName = $conn->real_escape_string($_POST['customerName']);
 
-    // Insert into the order table with customer name
-    $sql = "INSERT INTO productorder (productname, qty, price, category, customername) 
-            VALUES ('$newProduct', $newQty, $newPrice, '$newCategory', '$customerName')";
+    // Fetch price, current quantity, and category of the selected product
+    $priceSql = "SELECT price, qty, category FROM inventory WHERE productname = ?";
+    $stmt = $conn->prepare($priceSql);
+    $stmt->bind_param("s", $selectedProduct);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $product = $result->fetch_assoc();
 
-    if ($conn->query($sql) === TRUE) {
-        // Redirect to the main page after adding the order
-        header("Location: productorder.php");
-        exit;
+    if ($product) {
+        $newPrice = (float)$product['price'];
+        $currentQty = (int)$product['qty'];
+        $newCategory = $product['category']; // Get category from fetched product
+
+        if ($newQty <= $currentQty) { // Check if there is enough stock
+            // Insert into the order table with customer name and fetched category
+            $sql = "INSERT INTO productorder (productname, qty, price, category, customername) 
+                    VALUES ('$selectedProduct', $newQty, $newPrice, '$newCategory', '$customerName')";
+
+            if ($conn->query($sql) === TRUE) {
+                // Reduce quantity in the inventory table
+                $updatedQty = $currentQty - $newQty;
+                $updateSql = "UPDATE inventory SET qty = ? WHERE productname = ?";
+                $updateStmt = $conn->prepare($updateSql);
+                $updateStmt->bind_param("is", $updatedQty, $selectedProduct);
+                $updateStmt->execute();
+
+                // Redirect to the main page after adding the order
+                header("Location: productorder.php");
+                exit;
+            } else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
+        } else {
+            echo "Not enough stock available for this product.";
+        }
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Product not found.";
     }
 }
 
@@ -33,7 +62,6 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <link rel="stylesheet" href="stylingfile/maindisplay.css">
     <link rel="stylesheet" href="stylingfile/additem.css">
@@ -48,48 +76,38 @@ $conn->close();
             margin-top: 20px;
         }
 
-        .addnewOrder, .orderbackButton {
+        .addnewOrder,
+        .orderbackButton {
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
         }
     </style>
 </head>
-
 <body>
     <!-- Add Order Form -->
     <form method="POST" action="">
         <div class="addinputField">
             <h2>Add New Order</h2>
-            <label for="newProduct">Product Name</label>
-            <input class="orderprodnameField" type="text" id="newProduct" name="newProduct" placeholder="Product Name" required>
+
+            <!-- Product Dropdown -->
+            <label for="productDropdown">Product Name</label>
+            <select name="productDropdown" id="productDropdown" class="orderprodnameField" required>
+                <option value="">Select Product</option>
+                <?php
+                // Fetch and display products
+                if ($inventoryResult->num_rows > 0) {
+                    while ($row = $inventoryResult->fetch_assoc()) {
+                        echo "<option value='" . $row['productname'] . "'>" . $row['productname'] . " - $" . $row['price'] . " (Category: " . $row['category'] . ")</option>";
+                    }
+                } else {
+                    echo "<option value=''>No products available</option>";
+                }
+                ?>
+            </select>
 
             <label for="newQty">Quantity</label>
             <input class="orderprodqtyField" type="number" id="newQty" name="newQty" placeholder="Quantity" required min="0">
-
-            <label for="newPrice">Price</label>
-            <input class="orderprodpriceField" type="number" step="0.01" id="newPrice" name="newPrice" placeholder="Price" required min="0">
-
-            <!-- Category Dropdown -->
-            <label for="newCategory">Category</label>
-            <select name="newCategory" id="newCategory" class="prodcategoryField" required>
-                <option value="General Goods">General Goods</option>
-                <option value="Bunni Charms">Bunni Charms</option>
-                <option value="Phone Strap / Bag Charms">Phone Strap / Bag Charms</option>
-                <option value="Bunni Dolls">Bunni Dolls</option>
-                <option value="Clay Earrings">Clay Earrings</option>
-                <option value="Clay Bracelets">Clay Bracelets</option>
-                <option value="Clay Necklace">Clay Necklace</option>
-                <option value="Clay Pins">Clay Pins</option>
-                <option value="Deco Stickers">Deco Stickers</option>
-                <option value="Notepads">Notepads</option>
-                <option value="Sticker Set">Sticker Set</option>
-                <option value="Sticker Pack">Sticker Pack</option>
-                <option value="Acrylic Keychain">Acrylic Keychain</option>
-                <option value="Washi Tapes">Washi Tapes</option>
-                <option value="Clear Stamps">Clear Stamps</option>
-                <option value="Boxes and Bundles">Boxes and Bundles</option>
-            </select>
 
             <label for="customerName">Customer Name</label>
             <input class="customernameField" type="text" id="customerName" name="customerName" placeholder="Customer Name" required>
@@ -102,5 +120,4 @@ $conn->close();
         </div>
     </form>
 </body>
-
 </html>
