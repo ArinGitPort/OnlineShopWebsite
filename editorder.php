@@ -55,7 +55,7 @@ if (isset($_POST['editOrder'])) {
             }
         } else {
             // If the product is the same, ensure there is enough stock for the new quantity
-            if ($newQty > currentQty + currentOrderQty) {
+            if ($newQty > $currentQty + $currentOrderQty) {
                 echo "Not enough stock available for this product.";
                 exit;
             }
