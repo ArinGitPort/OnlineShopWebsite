@@ -15,9 +15,9 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = trim($_POST['username']); // Capture username input
-    $email = trim($_POST['email']); // Capture email input
-    $password = password_hash(trim($_POST['password']), PASSWORD_DEFAULT); // Hash the password
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    $password = password_hash(trim($_POST['password']), PASSWORD_DEFAULT);
 
     // Check if the username already exists
     $stmt = $conn->prepare("SELECT * FROM userinfo WHERE username = ?");
@@ -28,14 +28,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         echo "<script>alert('Username may already exist. Please choose a different username.');</script>";
     } else {
-        // Proceed to insert the new user
+        // Insert new user into database
         $stmt = $conn->prepare("INSERT INTO userinfo (username, userpassword, useremail) VALUES (?, ?, ?)");
         $stmt->bind_param("sss", $username, $password, $email);
 
         if ($stmt->execute()) {
-            echo "<script>alert('Registration Successful! Redirecting to login page.');</script>";
-            header("Location: login.php");
-            exit(); // Ensure no further code is executed
+            // Clear any active session before redirecting to login
+            session_unset(); // Unset all session variables
+            session_destroy(); // Destroy the session
+
+            echo "<script>
+                    alert('Registration Successful! You will be redirected to the login page.');
+                    window.location.href = 'login.php'; 
+                  </script>";
+            exit();
         } else {
             echo "Error: " . $stmt->error;
         }
@@ -43,6 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $stmt->close();
 }
+
 
 $conn->close();
 ?>
@@ -58,27 +65,12 @@ $conn->close();
     <title>Register</title>
     <style>
         .tooltip {
-            color: red; /* Tooltip text color */
-            font-size: 12px; /* Font size */
-            margin-left: 5px; /* Spacing from the input */
-        }
-    </style>
-</head>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <link rel="stylesheet" href="stylingfile/register.css">
-    <link rel="icon" href="iconlogo/bunniwinkleIcon.ico">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <style>
-        .tooltip {
-            color: red; /* Tooltip text color */
-            font-size: 12px; /* Font size */
-            margin-left: 5px; /* Spacing from the input */
+            color: red;
+            /* Tooltip text color */
+            font-size: 12px;
+            /* Font size */
+            margin-left: 5px;
+            /* Spacing from the input */
         }
     </style>
 </head>
@@ -94,11 +86,17 @@ $conn->close();
                 <input type="text" name="username" class="usernameBox" placeholder="Username" required><br><br>
 
                 <label>Password</label><br>
-                <input type="password" name="password" class="passwordBox" placeholder="Password" required><br><br>
+                <input type="password" name="password" id="password" class="passwordBox" placeholder="Password"
+                    required><br>
+
+                <div><input type="checkbox" id="showPassword" onclick="togglePassword()"> Show Password<br><br></div>
+
 
                 <label>Email</label><br>
-                <input type="email" name="email" class="emailbox" placeholder="Email" required onfocus="showTooltip(this)" onblur="hideTooltip(this)">
-                <span class="tooltip" style="display: none; margin-top:10px;">Please remember your email for recovery!</span><br><br>
+                <input type="email" name="email" class="emailbox" placeholder="Email" required
+                    onfocus="showTooltip(this)" onblur="hideTooltip(this)">
+                <span class="tooltip" style="display: none; margin-top:10px;">Please remember your email for
+                    recovery!</span><br><br>
 
                 <div class="registerButton">
                     <input type="submit" value="Register" class="loginButton">
@@ -121,19 +119,18 @@ $conn->close();
             tooltip.style.display = "none"; // Hide the tooltip
         }
 
-        // Add event listeners for hover
-        const emailInput = document.querySelector('input[name="email"]');
-        const tooltip = emailInput.nextElementSibling;
+        // Toggle password visibility
+        function togglePassword() {
+            var passwordField = document.getElementById("password");
+            var showPasswordCheckbox = document.getElementById("showPassword");
 
-        emailInput.addEventListener('mouseenter', () => {
-            tooltip.style.display = "inline"; // Show on hover
-        });
-
-        emailInput.addEventListener('mouseleave', () => {
-            if (document.activeElement !== emailInput) { // Hide only if not focused
-                tooltip.style.display = "none"; // Hide on mouse leave
+            // Toggle the type attribute
+            if (showPasswordCheckbox.checked) {
+                passwordField.type = "text"; // Show password
+            } else {
+                passwordField.type = "password"; // Hide password
             }
-        });
+        }
 
         // Client-side validation: Prevent spaces in the username
         document.querySelector('form').addEventListener('submit', function (e) {
@@ -147,4 +144,5 @@ $conn->close();
         });
     </script>
 </body>
+
 </html>
