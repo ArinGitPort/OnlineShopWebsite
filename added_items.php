@@ -39,7 +39,6 @@ $deletedItemsResult = $conn->query($deletedItemsSql);
             <div class="tableWrap">
                 <table class="historyTable">
                     <tr>
-                        <th>ID</th>
                         <th>Product Name</th>
                         <th>Quantity</th>
                         <th>Price Per Piece</th>
@@ -49,10 +48,9 @@ $deletedItemsResult = $conn->query($deletedItemsSql);
                     if ($addedItemsResult->num_rows > 0) {
                         while ($row = $addedItemsResult->fetch_assoc()) {
                             echo "<tr>
-                                <td>" . $row['id'] . "</td>
                                 <td>" . $row['productname'] . "</td>
                                 <td>" . $row['qty'] . "</td>
-                                <td>" . $row['price'] . "</td>
+                                <td>$" . number_format($row['price'], 2) . "</td>
                                 <td>" . $row['dateadded'] . "</td>
                               </tr>";
                         }

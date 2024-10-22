@@ -120,7 +120,7 @@ $productCount = $countResult->fetch_assoc()['totalProducts'];
                                 <td>" . $row['id'] . "</td>
                                 <td>" . $row['productname'] . "</td>
                                 <td>" . $row['qty'] . "</td>
-                                <td>" . $row['price'] . "</td>
+                                <td>$" . number_format($row['price'], 2) . "</td>
                                 <td>" . $row['category'] . "</td>
                                 <td>
                                     <form method='POST' action='' onsubmit='return confirmDelete();'>

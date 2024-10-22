@@ -42,7 +42,7 @@ if (isset($_POST['delete'])) {
 
     if ($orderResult && $orderResult->num_rows > 0) {
         $order = $orderResult->fetch_assoc();
-        
+
         // Insert into orderhistory table
         $insertHistorySql = "INSERT INTO orderhistory (productname, qty, price, category, customername, datecompleted) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insertHistorySql);
@@ -138,7 +138,8 @@ $conn->close();
                 <!-- Search and Sort Alphabetically Form -->
                 <form method="POST" action="">
                     <span class="orderCount">Total Orders: <?php echo $totalOrders; ?></span>
-                    <input type="text" name="searchProduct" class="ordersearchProduct" placeholder="Search Product or Customer">
+                    <input type="text" name="searchProduct" class="ordersearchProduct"
+                        placeholder="Search Product or Customer">
                     <button type="submit" class="searchButton">Search</button>
                     <button type="submit" name="sortAlpha" class="sortAlphaButton">Sort Alphabetically</button>
                     <button type="submit" name="sortCategory" class="sortAlphaButton">Sort by Category</button>
@@ -169,7 +170,7 @@ $conn->close();
                                 <td>" . $row['id'] . "</td>
                                 <td>" . $row['productname'] . "</td>
                                 <td>" . $row['qty'] . "</td>
-                                <td>" . $row['price'] . "</td>
+                                <td>$" . number_format($row['price'], 2) . "</td>
                                 <td>" . $row['category'] . "</td>
                                 <td>" . $row['customername'] . "</td>
                                 <td>" . '$' . number_format($totalPrice, 2) . "</td>
