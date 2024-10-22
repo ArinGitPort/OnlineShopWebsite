@@ -35,18 +35,42 @@ $totalOrders = $totalCountRow['total'];
 // Handle deletion (Complete Order)
 if (isset($_POST['delete'])) {
     $delete_id = intval($_POST['delete_id']);
-    $deleteSql = "DELETE FROM productorder WHERE id = $delete_id";
-    if ($conn->query($deleteSql) === TRUE) {
-        // Resequence IDs after deletion
-        $resequenceSql = "SET @count = 0;
-                          UPDATE productorder SET id = @count:= @count + 1;
-                          ALTER TABLE productorder AUTO_INCREMENT = 1;";
-        $conn->multi_query($resequenceSql);
-        echo "<script>window.location.href = window.location.href;</script>";
+
+    // Fetch the order details before deletion
+    $orderSql = "SELECT * FROM productorder WHERE id = $delete_id";
+    $orderResult = $conn->query($orderSql);
+
+    if ($orderResult && $orderResult->num_rows > 0) {
+        $order = $orderResult->fetch_assoc();
+        
+        // Insert into orderhistory table
+        $insertHistorySql = "INSERT INTO orderhistory (productname, qty, price, category, customername, datecompleted) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($insertHistorySql);
+        $stmt->bind_param("sidsss", $order['productname'], $order['qty'], $order['price'], $order['category'], $order['customername'], $order['datecompleted']);
+
+        if ($stmt->execute()) {
+            // Now delete the order from productorder
+            $deleteSql = "DELETE FROM productorder WHERE id = $delete_id";
+            if ($conn->query($deleteSql) === TRUE) {
+                // Resequence IDs after deletion
+                $resequenceSql = "SET @count = 0;
+                                  UPDATE productorder SET id = @count:= @count + 1;
+                                  ALTER TABLE productorder AUTO_INCREMENT = 1;";
+                $conn->multi_query($resequenceSql);
+                echo "<script>window.location.href = window.location.href;</script>";
+            } else {
+                echo "<script>alert('Error deleting order: " . $conn->error . "');</script>";
+            }
+        } else {
+            echo "<script>alert('Error inserting into order history: " . $stmt->error . "');</script>";
+        }
+
+        $stmt->close();
     } else {
-        echo "<script>alert('Error deleting order: " . $conn->error . "');</script>";
+        echo "<script>alert('Order not found.');</script>";
     }
 }
+
 
 // Handle order cancellation (Restock Product)
 if (isset($_POST['cancel'])) {
@@ -121,7 +145,7 @@ $conn->close();
                 </form>
 
                 <!-- Link to Add Order Form -->
-                <button class="addnewOrder" onclick="window.location.href='additem.php'">Add New Order</button>
+                <button class="addnewOrder" onclick="window.location.href='addorder.php'">Add New Order</button>
             </div>
 
             <div class="tableContainer">

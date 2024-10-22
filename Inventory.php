@@ -45,7 +45,7 @@ $searchQuery = "";
 if (isset($_POST['searchProduct'])) {
     $searchProduct = addslashes($_POST['searchProduct']);
     // Search in both 'id' and 'productname'
-    $searchQuery = " WHERE productname LIKE '%$searchProduct%' OR id LIKE '%$searchProduct%'";
+    $searchQuery = " WHERE productname LIKE '%$searchProduct%' OR id LIKE '%$searchProduct%' OR category LIKE '%$searchProduct%'";
 }
 
 // Sort Alphabetically
@@ -95,7 +95,7 @@ $productCount = $countResult->fetch_assoc()['totalProducts'];
 
                 <!-- Add Product Button -->
                 <div class="button-container">
-                    <button type="button" class="sortAlphaButton" onclick="window.location.href='inventoryaddeditem.php';">Add New Product</button>
+                    <button type="button" class="sortAlphaButton" onclick="window.location.href='inventoryaddproduct.php';">Add New Product</button>
                 </div>
             </div>
 

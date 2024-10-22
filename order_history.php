@@ -16,6 +16,12 @@ $addedItemsResult = $conn->query($addedItemsSql);
 $orderHistorySql = "SELECT * FROM orderhistory ORDER BY id DESC"; // LIFO: latest first
 $orderHistoryResult = $conn->query($orderHistorySql);
 
+// Fetch the latest order ID (top of the stack)
+$latestOrderIdSql = "SELECT MAX(id) AS latestId FROM orderhistory";
+$latestOrderIdResult = $conn->query($latestOrderIdSql);
+$latestOrder = $latestOrderIdResult->fetch_assoc();
+$latestOrderId = $latestOrder['latestId'];
+
 // Revert Order
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['revertOrderId'])) {
     $orderId = intval($_POST['revertOrderId']);
@@ -41,10 +47,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['revertOrderId'])) {
         $deleteStmt->execute();
 
         // Optionally add success message here
-        echo "<script>alert('Order reverted successfully!'); window.location.reload();</script>";
+        echo "<script>alert('Order reverted successfully!'); window.location.href = window.location.href;</script>";
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -69,31 +74,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['revertOrderId'])) {
             <div class="tableWrap">
                 <table class="historyTable">
                     <tr>
-                        <th>ID</th>
                         <th>Product Name</th>
                         <th>Quantity</th>
                         <th>Price</th>
                         <th>Category</th>
                         <th>Customer Name</th>
                         <th>Date Completed</th>
-                        <th>Action</th> <!-- Add Action Column -->
+                        <th>Action</th> 
                     </tr>
                     <?php
                     if ($orderHistoryResult->num_rows > 0) {
                         while ($row = $orderHistoryResult->fetch_assoc()) {
                             echo "<tr>
-                                <td>" . $row['id'] . "</td>
-                                <td>" . $row['productname'] . "</td>
-                                <td>" . $row['qty'] . "</td>
-                                <td>" . $row['price'] . "</td>
-                                <td>" . $row['category'] . "</td>
-                                <td>" . $row['customername'] . "</td>
-                                <td>" . $row['datecompleted'] . "</td>
+                                <td>" . htmlspecialchars($row['productname']) . "</td>
+                                <td>" . htmlspecialchars($row['qty']) . "</td>
+                                <td>" . htmlspecialchars($row['price']) . "</td>
+                                <td>" . htmlspecialchars($row['category']) . "</td>
+                                <td>" . htmlspecialchars($row['customername']) . "</td>
+                                <td>" . htmlspecialchars($row['datecompleted']) . "</td>
                                 <td>
-                                    <form method='POST' style='display:inline;'>
-                                        <input type='hidden' name='revertOrderId' value='" . $row['id'] . "'>
-                                        <input class='deletetableButton' type='submit' value='Revert' onclick='return confirm(\"Are you sure you want to revert this order?\");'>
-                                    </form>
+                                    <form method='POST' style='display:inline;'>";
+
+                            // Enable revert only for the latest (top of the stack) order
+                            if ($row['id'] == $latestOrderId) {
+                                // Allow reversion for the latest order
+                                echo "<input type='hidden' name='revertOrderId' value='" . $row['id'] . "'>
+                                      <input class='deletetableButton' type='submit' value='Revert' onclick='return confirm(\"Are you sure you want to revert this order?\");'>";
+                            } else {
+                                echo "<button class='deletetableButton disabledButton' disabled onclick='showRevertAlert()'>Revert</button>";
+                            }
+
+                            echo "</form>
                                 </td>
                               </tr>";
                         }
@@ -105,9 +116,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['revertOrderId'])) {
             </div>
         </div>
     </div>
-</body>
 
-</html>
+    <style>
+        .disabledButton {
+            background-color: #d3d3d3;
+            color: #808080;
+            border: 1px solid #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+
+</body>
 
 <?php
 $conn->close();
