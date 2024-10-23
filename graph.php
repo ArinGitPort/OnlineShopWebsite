@@ -1,23 +1,24 @@
 <?php
 include 'sessionchecker.php';
 
-
 $conn = new mysqli("localhost", "root", "", "logindb");
 if ($conn->connect_error) {
     die("Connection Failed: " . $conn->connect_error);
 }
 
-// Query to get the total number of orders by category
-$sql = "SELECT category, COUNT(*) as total FROM orderhistory GROUP BY category";
+// Query to get the total number of items sold and total sales by category
+$sql = "SELECT category, COUNT(*) as total_items_sold, SUM(price * qty) as total_sales FROM orderhistory GROUP BY category";
 $result = $conn->query($sql);
 
 $categories = [];
-$totals = [];
+$totalItemsSold = [];
+$totalSales = [];
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $categories[] = $row['category'];
-        $totals[] = $row['total'];
+        $totalItemsSold[] = $row['total_items_sold']; // Total items sold
+        $totalSales[] = $row['total_sales']; // Total sales
     }
 }
 
@@ -33,13 +34,10 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Most Ordered Products by Category</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
+</head >
 
 <body>
     <?php include 'sidebar.php' ?>
-
-
-    <!-- The rest of your page code -->
 
     <div class="graphContainer">
         <div class="h2Div">
@@ -50,12 +48,11 @@ $conn->close();
         </div>
     </div>
 
-
     <script>
-        //chartjs import
         // Fetch PHP data from the server
         var categories = <?php echo json_encode($categories); ?>;
-        var totals = <?php echo json_encode($totals); ?>;
+        var totalItemsSold = <?php echo json_encode($totalItemsSold); ?>;
+        var totalSales = <?php echo json_encode($totalSales); ?>;
 
         // Initialize the chart
         var ctx = document.getElementById('orderChart').getContext('2d');
@@ -65,23 +62,47 @@ $conn->close();
                 labels: categories,
                 datasets: [{
                     label: 'Total Orders',
-                    data: totals,
-                    backgroundColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 206, 86)',
-                        'rgb(75, 192, 192)',
-                        'rgb(153, 102, 255)',
-                        'rgb(255, 159, 64)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 255, 255, 1)'
-                    ],
-                    borderWidth: 2
+                    data: totalItemsSold,
+                    backgroundColor: 'rgba(54, 162, 235, 1)',
+                    borderColor: 'rgba(255, 255, 255, 1)',
+                    borderWidth: 1,
+                    yAxisID: 'y-axis-1',
+                }, {
+                    label: 'Total Sales ($)',
+                    data: totalSales,
+                    backgroundColor: 'rgba(255, 99, 132, 1)',
+                    borderColor: 'rgba(255, 255, 255, 1)',
+                    borderWidth: 1,
+                    yAxisID: 'y-axis-2',
                 }]
             },
             options: {
                 responsive: true,
+                scales: {
+                    yAxes: [{
+                        id: 'y-axis-1',
+                        type: 'linear',
+                        position: 'left',
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Total Items Sold'
+                        }
+                    }, {
+                        id: 'y-axis-2',
+                        type: 'linear',
+                        position: 'right',
+                        ticks: {
+                            beginAtZero: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Total Sales ($)'
+                        }
+                    }]
+                },
                 plugins: {
                     legend: {
                         position: 'top',
