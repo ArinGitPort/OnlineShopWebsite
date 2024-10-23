@@ -12,9 +12,9 @@ if ($conn->connect_error) {
 if (isset($_POST['delete'])) {
     $deleteID = $_POST['delete_id'];
 
-    // Insert deleted product into 'deleteditem' table
-    $sql = "INSERT INTO deleteditem (id, deletedproduct, qty, price, category) 
-            SELECT id, productname, qty, price, category 
+    // Insert deleted product into 'deleteditem' table without specifying id
+    $sql = "INSERT INTO deleteditem (deletedproduct, qty, price, category) 
+            SELECT productname, qty, price, category 
             FROM inventory WHERE id=$deleteID";
     $conn->query($sql);
 
