@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2024 at 08:00 AM
+-- Generation Time: Oct 20, 2024 at 05:05 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -36,16 +36,6 @@ CREATE TABLE `addeditem` (
   `dateadded` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `addeditem`
---
-
-INSERT INTO `addeditem` (`id`, `productname`, `qty`, `price`, `category`, `dateadded`) VALUES
-(1, 'Sunflower Bunni Beaded Bracelet', 30, 40.00, '', '2024-10-22 02:44:59'),
-(2, 'Controller', 30, 90.00, '', '2024-10-22 04:57:37'),
-(3, 'Clay', 10, 25.00, '', '2024-10-22 04:58:02'),
-(4, 'Happy Mail Bundle', 30, 19.00, '', '2024-10-23 03:17:24');
-
 -- --------------------------------------------------------
 
 --
@@ -60,13 +50,6 @@ CREATE TABLE `deleteditem` (
   `category` varchar(100) NOT NULL,
   `datedeleted` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `deleteditem`
---
-
-INSERT INTO `deleteditem` (`id`, `deletedproduct`, `qty`, `price`, `category`, `datedeleted`) VALUES
-(15, 'Clay', 10, 25.00, 'General Goods', '2024-10-23 09:46:00');
 
 -- --------------------------------------------------------
 
@@ -87,13 +70,10 @@ CREATE TABLE `inventory` (
 --
 
 INSERT INTO `inventory` (`id`, `productname`, `qty`, `price`, `category`) VALUES
-(1, 'Cappybara Bunni Charm', 94, 28.00, 'Bunni Charms'),
-(2, 'Mia Bunny Charm', 88, 20.00, 'Bunni Charms'),
-(3, 'Totoro Phone/Key or Bag Charm', 26, 10.00, 'Phone Strap / Bag Charms'),
-(4, 'Sanrio Phone/Key or Bag Charm', 27, 10.00, 'Phone Strap / Bag Charms'),
-(5, 'Pompompurin Bunni Beaded Bracelet', 30, 40.00, 'Clay Bracelets'),
-(6, 'Sunflower Bunni Beaded Bracelet', 25, 40.00, 'Clay Bracelets'),
-(7, 'Happy Mail Bundle', 29, 19.00, 'Boxes and Bundles');
+(1, 'Cappybara Bunni Charm', 100, 28.00, 'Bunni Charms'),
+(2, 'Mia Bunny Charm', 100, 20.00, 'Bunni Charms'),
+(3, 'Totoro Phone/Key or Bag Charm', 30, 10.00, 'Phone Strap / Bag Charms'),
+(4, 'Sanrio Phone/Key or Bag Charm', 27, 10.00, 'Phone Strap / Bag Charms');
 
 -- --------------------------------------------------------
 
@@ -116,26 +96,12 @@ CREATE TABLE `orderhistory` (
 --
 
 INSERT INTO `orderhistory` (`id`, `productname`, `qty`, `price`, `category`, `customername`, `datecompleted`) VALUES
-(24, 'Mia Bunny Charm', 2, 20.00, 'Bunni Charms', 'Allen', '2024-10-23 10:13:37'),
-(25, 'Cappybara Bunni Charm', 1, 28.00, 'Bunni Charms', 'Allen', '2024-10-23 10:13:58'),
-(26, 'Sunflower Bunni Beaded Bracelet', 2, 40.00, 'Clay Bracelets', 'Jasper', '2024-10-23 15:32:14'),
-(27, 'Happy Mail Bundle', 1, 19.00, 'Boxes and Bundles', 'Jeremiah', '2024-10-23 15:32:16');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `orderhistory_20241023`
---
-
-CREATE TABLE `orderhistory_20241023` (
-  `id` int(11) NOT NULL,
-  `productname` varchar(255) NOT NULL,
-  `qty` int(11) NOT NULL,
-  `price` decimal(10,2) NOT NULL,
-  `category` varchar(255) NOT NULL,
-  `customername` varchar(255) NOT NULL,
-  `datecompleted` datetime DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(12, 'Stickers', 20, 235.34, 'Deco Stickers', 'Allen', '2024-10-18 14:26:51'),
+(13, 'Controller', 23, 32.00, 'General Goods', 'Allen', '2024-10-18 14:27:15'),
+(14, 'Clay', 23, 225.00, 'General Goods', 'Allen', '2024-10-18 14:30:23'),
+(15, 'Bag', 2, 235.00, 'General Goods', 'Allen', '2024-10-18 14:30:24'),
+(16, 'Clay3', 123, 123.00, 'General Goods', 'Joshua', '2024-10-18 14:31:03'),
+(17, 'Clay2', 123, 123.00, 'General Goods', 'Allen', '2024-10-19 09:20:37');
 
 -- --------------------------------------------------------
 
@@ -158,7 +124,7 @@ CREATE TABLE `productorder` (
 --
 
 INSERT INTO `productorder` (`id`, `productname`, `qty`, `price`, `category`, `customername`, `dateadded`) VALUES
-(1, 'Sanrio Phone/Key or Bag Charm', 2, 10.00, 'Phone Strap / Bag Charms', 'Joshua', '2024-10-23 15:33:02');
+(1, 'Sanrio Phone/Key or Bag Charm', 3, 10.00, 'Bunni Charms', 'Allen', '2024-10-20 14:21:41');
 
 -- --------------------------------------------------------
 
@@ -178,9 +144,7 @@ CREATE TABLE `userinfo` (
 --
 
 INSERT INTO `userinfo` (`id`, `username`, `userpassword`, `useremail`) VALUES
-(1, 'admin', '$2y$10$qHIEEuTx2E8xfLM7LN8YYOIdSiheOCJNnzhzOwhw3/mSYg6zZG4Hy', 'admin@gmail.com'),
-(2, 'allen', '$2y$10$gGGFX2DNfQrBxCyPYhN71OrBx0jC.LIoo95rbXhy363JeHcoaqeOC', 'allen@gmail.com'),
-(3, 'monocell', '$2y$10$jutyAMSzVmBRMuV4/Y9Q4eDHSxDKZSd/1QrBNSeA8kYqgfrSLhnkO', 'monocell@gmail.com');
+(1, 'admin', '$2y$10$qHIEEuTx2E8xfLM7LN8YYOIdSiheOCJNnzhzOwhw3/mSYg6zZG4Hy', 'admin@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -211,12 +175,6 @@ ALTER TABLE `orderhistory`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `orderhistory_20241023`
---
-ALTER TABLE `orderhistory_20241023`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `productorder`
 --
 ALTER TABLE `productorder`
@@ -236,31 +194,25 @@ ALTER TABLE `userinfo`
 -- AUTO_INCREMENT for table `addeditem`
 --
 ALTER TABLE `addeditem`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `deleteditem`
 --
 ALTER TABLE `deleteditem`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `orderhistory`
 --
 ALTER TABLE `orderhistory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
-
---
--- AUTO_INCREMENT for table `orderhistory_20241023`
---
-ALTER TABLE `orderhistory_20241023`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `productorder`
@@ -272,7 +224,7 @@ ALTER TABLE `productorder`
 -- AUTO_INCREMENT for table `userinfo`
 --
 ALTER TABLE `userinfo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
