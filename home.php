@@ -31,7 +31,7 @@ include 'sessionchecker.php';
                 <!-- Full-width images with number and caption text -->
                 <div class="mySlides fade">
                     <div class="numbertext">1 / 3</div>
-                    <img src="imgBG/bunniwinkleBG.jpg" class="slideshow-image">
+                    <img src="imgBG/bunniBG.jpg" class="slideshow-image">
                     <div class="text"></div>
                 </div>
 
