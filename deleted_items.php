@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['revertItemId'])) {
         $deleteStmt->execute();
 
         // Optionally add success message here
-        echo "<script>alert('Item reverted successfully!'); window.location.href = window.location.href;</script>";
+        echo "<script>alert('Item returned to order!'); window.location.href = window.location.href;</script>";
     }
 }
 ?>

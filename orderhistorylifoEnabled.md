@@ -10,14 +10,12 @@ if ($conn->connect_error) {
 
 // Initialize search variables
 $searchQuery = "";
-$searchPerformed = false; // Track if a search has been performed
 
 // Check if the search form has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['searchProduct'])) {
     $searchProduct = $conn->real_escape_string($_POST['searchProduct']);
     // Search in 'productname', 'id', and 'category'
     $searchQuery = " WHERE productname LIKE '%$searchProduct%' OR customername LIKE '%$searchProduct%' OR category LIKE '%$searchProduct%'";
-    $searchPerformed = true; // Set the flag to true
 }
 
 // Fetch added items from inventory
@@ -85,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['revertOrderId'])) {
                 <form method="POST" action="">
                     <input type="text" name="searchProduct" class="searchprodField" placeholder="Search " value="<?php echo isset($searchProduct) ? htmlspecialchars($searchProduct) : ''; ?>">
                     <button type="submit" class="searchButton">Search</button>
- </form>
+                </form>
             </div>
             <div class="tableWrap">
                 <table class="historyTable">
@@ -114,18 +112,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['revertOrderId'])) {
                                 <td>
                                     <form method='POST' style='display:inline;'>";
 
-                            // Enable revert for all orders when a search is performed
-                            if ($searchPerformed) {
+                            // Enable revert only for the latest (top of the stack) order
+                            if ($row['id'] == $latestOrderId) {
+                                // Allow reversion for the latest order
                                 echo "<input type='hidden' name='revertOrderId' value='" . $row['id'] . "'>
                                       <input class='deletetableButton' type='submit' value='Revert' onclick='return confirm(\"Are you sure you want to revert this order?\");'>";
                             } else {
-                                // Enable revert only for the latest (top of the stack) order
-                                if ($row['id'] == $latestOrderId) {
-                                    echo "<input type='hidden' name='revertOrderId' value='" . $row['id'] . "'>
-                                          <input class='deletetableButton' type='submit' value='Revert' onclick='return confirm(\"Are you sure you want to revert this order?\");'>";
-                                } else {
-                                    echo "<button class='deletetableButton disabledButton' disabled onclick='showRevertAlert()'>Revert</button>";
-                                }
+                                echo "<button class='deletetableButton disabledButton' disabled onclick='showRevertAlert()'>Revert</button>";
                             }
 
                             echo "</form>
