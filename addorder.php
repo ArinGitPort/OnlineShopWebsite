@@ -50,7 +50,7 @@ if (isset($_POST['addOrder'])) {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
         } else {
-            echo "Not enough stock available for this product.";
+            echo "<script>alert('Not enough stock available for this product.')</script>";
         }
     } else {
         echo "Product not found.";

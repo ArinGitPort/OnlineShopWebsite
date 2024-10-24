@@ -41,6 +41,7 @@
                     <ul class="dropdown-content" id="dropdownContent">
                         <li><a href="added_items.php" class="dropdown-item">Added Products</a></li>
                         <li><a href="deleted_items.php" class="dropdown-item">Unavailable Products</a></li>
+                        <li><a href="permdeleted_items.php" class="dropdown-item">Deleted Products</a></li>
                         <li><a href="order_history.php" class="dropdown-item">Completed Order</a></li>
                     </ul>
                 </div>
