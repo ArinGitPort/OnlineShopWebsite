@@ -3,40 +3,35 @@ session_start(); // Start the session
 
 // Database connection
 $servername = "localhost";
-$dbUsername = "root"; // Database username
-$dbPassword = ""; // Database password
-$dbname = "logindb"; // Use your existing database name
+$dbUsername = "root";
+$dbPassword = ""; 
+$dbname = "logindb"; 
 
 $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-// Redirect if already logged in
 if (isset($_SESSION['username'])) {
   header("Location: home.php");
   exit();
 }
 
-// Process login
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $usernameInput = trim($_POST['usernameInp']); // Capture username input
-  $passwordInput = trim($_POST['passwordInp']); // Capture password input
+  $usernameInput = trim($_POST['usernameInp']); 
+  $passwordInput = trim($_POST['passwordInp']); 
 
-  // Use prepared statements to avoid SQL injection
-  $stmt = $conn->prepare("SELECT userpassword FROM userinfo WHERE BINARY username = ?"); // Case-sensitive comparison using BINARY
+  $stmt = $conn->prepare("SELECT userpassword FROM userinfo WHERE BINARY username = ?"); 
   $stmt->bind_param("s", $usernameInput);
   $stmt->execute();
   $result = $stmt->get_result();
 
   if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    // Use password_verify to check if the input password matches the hashed password
     if (password_verify($passwordInput, $row['userpassword'])) {
-      $_SESSION['username'] = $usernameInput; // Store username in session
-      header("Location: home.php"); // Redirect to dashboard
+      $_SESSION['username'] = $usernameInput; 
+      header("Location: home.php"); 
       exit();
     } else {
       echo "<script>alert('Invalid password!');</script>";
@@ -45,10 +40,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "<script>alert('No user found!');</script>";
   }
 
-  $stmt->close(); // Close statement
+  $stmt->close(); 
 }
 
-$conn->close(); // Close connection
+$conn->close(); 
 
 ?>
 
@@ -78,9 +73,7 @@ $conn->close(); // Close connection
         <input name="usernameInp" class="usernameBox" type="text" placeholder="Username" required><br>
         <input name="passwordInp" id="passwordInp" class="passwordBox" type="password" placeholder="Password"
           required><br>
-        <!-- Show Password Checkbox -->
       </div>
-      <!-- Forgot Password Link -->
       <div class="forgotShowPasswordDiv">
         <input type="checkbox" id="showPassword" onclick="togglePassword()" class="togglepass"> Show Password
         <a href="forgotpass.php" class="forgotPassLink">Forgot Password?</a>
@@ -92,7 +85,6 @@ $conn->close(); // Close connection
     </form>
   </div>
 
-  <!-- JavaScript to toggle password visibility -->
   <script>
     function togglePassword() {
       var passwordInput = document.getElementById("passwordInp");

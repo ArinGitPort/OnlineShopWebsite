@@ -1,7 +1,7 @@
 <?php
 include 'sessionchecker.php';
 
-$conn = new mysqli("localhost", "root", "", "logindb");
+$conn = new mysqli("localhost:3310", "root", "", "logindb");
 
 // Check connection
 if ($conn->connect_error) {
@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 if (isset($_POST['delete'])) {
     $deleteID = $_POST['delete_id'];
 
-    // Insert deleted product into 'deleteditem' table without specifying id
+    // Insert deleted product into 'deleteditem' table 
     $sql = "INSERT INTO deleteditem (deletedproduct, qty, price, category) 
             SELECT productname, qty, price, category 
             FROM inventory WHERE id=$deleteID";
@@ -44,7 +44,7 @@ if (isset($_POST['delete'])) {
 $searchQuery = "";
 if (isset($_POST['searchProduct'])) {
     $searchProduct = addslashes($_POST['searchProduct']);
-    // Search in both 'id' and 'productname'
+    
     $searchQuery = " WHERE productname LIKE '%$searchProduct%' OR id LIKE '%$searchProduct%' OR category LIKE '%$searchProduct%'";
 }
 
@@ -56,10 +56,9 @@ if (isset($_POST['sortAlpha'])) {
 
 // Sort by Category
 if (isset($_POST['sortCategory'])) {
-    $sortQuery = " ORDER BY category ASC"; // Sort by category
+    $sortQuery = " ORDER BY category ASC"; 
 }
 
-// Count total products
 $countSql = "SELECT COUNT(*) AS totalProducts FROM inventory";
 $countResult = $conn->query($countSql);
 $productCount = $countResult->fetch_assoc()['totalProducts'];
@@ -84,7 +83,7 @@ $productCount = $countResult->fetch_assoc()['totalProducts'];
     <div class="maindisplayDiv">
         <div class="insideDisplayDiv">
             <div class="userMenuDiv">
-                <!-- Search and Sort Forms -->
+               
                 <form method="POST" action="">
                     <span class="orderCount">Total Products: <?php echo $productCount; ?></span>
                     <input type="text" name="searchProduct" class="searchprodField" placeholder="Search Product">
@@ -93,7 +92,7 @@ $productCount = $countResult->fetch_assoc()['totalProducts'];
                     <button type="submit" name="sortCategory" class="sortAlphaButton">Sort by Category</button> <!-- New Sort Category Button -->
                 </form>
 
-                <!-- Add Product Button -->
+               
                 <div class="button-container">
                     <button type="button" class="sortAlphaButton" onclick="window.location.href='inventoryaddproduct.php';">Add New Product</button>
                 </div>
@@ -110,7 +109,7 @@ $productCount = $countResult->fetch_assoc()['totalProducts'];
                         <th>Action</th>
                     </tr>
                     <?php
-                    // Generate the inventory table
+                    
                     $sql = "SELECT id, productname, qty, price, category FROM inventory" . $searchQuery . $sortQuery;
                     $result = $conn->query($sql);
 
@@ -135,7 +134,7 @@ $productCount = $countResult->fetch_assoc()['totalProducts'];
                               </tr>";
                         }
                     } else {
-                        echo "<tr><td colspan='6'>No products found</td></tr>"; // Adjusted colspan for the new column
+                        echo "<tr><td colspan='6'>No products found</td></tr>"; 
                     }
 
                     $conn->close();
