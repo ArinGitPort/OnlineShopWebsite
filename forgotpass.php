@@ -5,7 +5,7 @@ include 'sessionchecker.php';
 // Database connection
 $servername = "localhost";
 $dbUsername = "root"; // Database username
-$dbPassword = ""; // Database password
+$dbPassword = "1234"; // Database password
 $dbname = "logindb"; // Use your existing database name
 
 $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);

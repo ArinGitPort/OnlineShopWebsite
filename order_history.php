@@ -1,7 +1,7 @@
 <?php
 include 'sessionchecker.php';
 
-$conn = new mysqli("localhost:3310", "root", "", "logindb");
+$conn = new mysqli("localhost", "root", "1234", "logindb");
 
 // Check connection
 if ($conn->connect_error) {
