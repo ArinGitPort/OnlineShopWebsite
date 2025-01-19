@@ -3,13 +3,7 @@
 include 'sessionchecker.php';
 
 
-session_start();
-$conn = new mysqli("localhost", "root", "1234", "logindb");
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include 'db_connection.php';
 
 // Fetch added items from inventory
 $addedItemsSql = "SELECT * FROM addeditem ORDER BY id DESC"; // LIFO: latest first

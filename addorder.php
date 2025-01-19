@@ -1,11 +1,7 @@
 <?php
 session_start();
-$conn = new mysqli("localhost", "root", "1234", "logindb");
+include 'db_connection.php';
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 // Fetch products from inventory, including the category
 $inventorySql = "SELECT productname, price, qty, category FROM inventory"; // Include category

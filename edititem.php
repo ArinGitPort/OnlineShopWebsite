@@ -1,8 +1,5 @@
 <?php
-$conn = new mysqli("localhost", "root", "1234", "logindb");
-if ($conn->connect_error) {
-    die("Connection Failed: " . $conn->connect_error);
-}
+include 'db_connection.php';
 
 // Fetch product details
 $id = $_GET['edit_id'];

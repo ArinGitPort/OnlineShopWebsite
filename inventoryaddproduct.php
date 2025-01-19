@@ -1,12 +1,7 @@
 <?php
 include 'sessionchecker.php';
 
-$conn = new mysqli("localhost", "root", "1234", "logindb");
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include 'db_connection.php';
 
 // Add new product to the inventory table
 if (isset($_POST['addProduct'])) {

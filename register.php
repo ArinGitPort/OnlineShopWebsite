@@ -1,18 +1,5 @@
 <?php
-session_start(); // Start the session
-
-// Database connection
-$servername = "localhost";
-$dbUsername = "root"; // Database username
-$dbPassword = "1234"; // Database password
-$dbname = "logindb"; // Use your existing database name
-
-$conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include 'db_connection.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username']);

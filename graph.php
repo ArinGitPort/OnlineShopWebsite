@@ -1,10 +1,5 @@
 <?php
-include 'sessionchecker.php';
-
-$conn = new mysqli("localhost", "root", "1234", "logindb");
-if ($conn->connect_error) {
-    die("Connection Failed: " . $conn->connect_error);
-}
+include 'db_connection.php';
 
 // Query to get the total number of items sold and total sales by category
 $sql = "SELECT category, COUNT(*) as total_items_sold, SUM(price * qty) as total_sales FROM orderhistory GROUP BY category";

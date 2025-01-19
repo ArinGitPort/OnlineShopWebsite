@@ -1,17 +1,7 @@
 <?php
 session_start(); // Start the session
 
-// Database connection
-$servername = "localhost";
-$dbUsername = "root";
-$dbPassword = "1234"; 
-$dbname = "logindb"; 
-
-$conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
-
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+include 'db_connection.php';
 
 if (isset($_SESSION['username'])) {
   header("Location: home.php");
