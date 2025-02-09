@@ -82,6 +82,9 @@ $conn->close();
                 <label>Email</label><br>
                 <input type="email" name="email" class="emailbox" placeholder="Email" required
                     onfocus="showTooltip(this)" onblur="hideTooltip(this)">
+
+                
+                
                 <span class="tooltip" style="display: none; margin-top:10px;">Please remember your email for
                     recovery!</span><br><br>
 
