@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['revertOrderId'])) {
     <div class="maindisplayDiv">
         <div class="insideTabelDisplayDiv">
             <div class="historylabelDiv">
-                <h2 class="historyLabel">Order History</h2>
+                <h2 class="historyLabel">Transaction History</h2>
                 <form method="POST" action="">
                     <input type="text" name="searchProduct" class="searchprodField" placeholder="Search " value="<?php echo isset($searchProduct) ? htmlspecialchars($searchProduct) : ''; ?>">
                     <button type="submit" class="searchButton">Search</button>

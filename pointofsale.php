@@ -39,6 +39,25 @@
             margin-bottom: 20px;
         }
 
+        .customerInfo {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .customerInfo label {
+            font-weight: 600;
+        }
+
+        .customerInfo input,
+        .customerInfo select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
         .cartItems {
             flex: 1;
             display: flex;
@@ -199,6 +218,17 @@
         <!-- Left Side: Cart / Selected Items -->
         <div class="leftPanel">
             <div class="cartHeader">Cart / Selected Items</div>
+            <!-- Customer and Payment Details -->
+            <div class="customerInfo">
+                <label for="customerName">Customer Name:</label>
+                <input id="customerName" type="text" placeholder="Enter Customer Name..."/>
+                <label for="paymentMethod">Payment Method:</label>
+                <select id="paymentMethod">
+                    <option value="cash">Cash</option>
+                    <option value="credit">Credit Card</option>
+                    <option value="mobile">Mobile Payment</option>
+                </select>
+            </div>
             <div class="cartItems">
                 <!-- Example cart items with placeholders for quantity and price -->
                 <div class="cartItemBox">

@@ -71,13 +71,15 @@
 <body>
     <div class="managementContainer">
         <h2>Account Management</h2>
-        <input type="text" class="searchBar" placeholder="Search for an account...">
+        <p>Manage user roles, credentials, and permissions.</p>
+        <input type="text" class="searchBar" placeholder="Search for an account (Username, Email, Contact)...">
         <div class="tableContainer">
             <table>
                 <tr>
                     <th>ID</th>
                     <th>Username</th>
                     <th>Email</th>
+                    <th>Contact</th>
                     <th>Role</th>
                     <th>Actions</th>
                 </tr>
@@ -85,6 +87,7 @@
                     <td>1</td>
                     <td>BunniwinklePulilan</td>
                     <td>BunniwinklePulilan@gmail.com</td>
+                    <td>+1234567890</td>
                     <td>Admin</td>
                     <td>
                         <button class="actionButton">Edit</button>
@@ -97,6 +100,7 @@
                     <td>2</td>
                     <td>Jane</td>
                     <td>Jane@gmail.com</td>
+                    <td>+0987654321</td>
                     <td>Staff</td>
                     <td>
                         <button class="actionButton">Edit</button>
@@ -109,6 +113,7 @@
                     <td>3</td>
                     <td>Jame</td>
                     <td>Jame@gmail.com</td>
+                    <td>+1122334455</td>
                     <td>Brand Partner</td>
                     <td>
                         <button class="actionButton">Edit</button>
@@ -119,7 +124,10 @@
                 </tr>
             </table>
         </div>
+        <h3>Owner Actions</h3>
+        <p>Create, edit, or suspend user accounts.</p>
+        <p>Assign roles to Staff, Brand Partners, and other users.</p>
+        <p>Reset passwords or deactivate accounts.</p>
     </div>
 </body>
-
 </html>
