@@ -1,7 +1,12 @@
 <?php
 include 'sessionchecker.php';
 
-include 'db_connection.php';
+$conn = new mysqli("localhost", "root", "", "logindb");
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
 // Initialize search variables
 $searchQuery = "";
@@ -74,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['revertOrderId'])) {
     <div class="maindisplayDiv">
         <div class="insideTabelDisplayDiv">
             <div class="historylabelDiv">
-                <h2 class="historyLabel">Transaction History</h2>
+                <h2 class="historyLabel">Order History</h2>
                 <form method="POST" action="">
                     <input type="text" name="searchProduct" class="searchprodField" placeholder="Search " value="<?php echo isset($searchProduct) ? htmlspecialchars($searchProduct) : ''; ?>">
                     <button type="submit" class="searchButton">Search</button>

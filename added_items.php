@@ -1,11 +1,6 @@
 <?php
-session_start();
-$conn = new mysqli("localhost", "root", "", "logindb");
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include 'sessionchecker.php';
+include 'db_connection.php';
 
 // Fetch added items from inventory
 $addedItemsSql = "SELECT * FROM addeditem ORDER BY id DESC"; // LIFO: latest first
@@ -39,20 +34,18 @@ $deletedItemsResult = $conn->query($deletedItemsSql);
             <div class="tableWrap">
                 <table class="historyTable">
                     <tr>
-                        <th>ID</th>
                         <th>Product Name</th>
                         <th>Quantity</th>
-                        <th>Price</th>
+                        <th>Price Per Piece</th>
                         <th>Date Added</th>
                     </tr>
                     <?php
                     if ($addedItemsResult->num_rows > 0) {
                         while ($row = $addedItemsResult->fetch_assoc()) {
                             echo "<tr>
-                                <td>" . $row['id'] . "</td>
                                 <td>" . $row['productname'] . "</td>
                                 <td>" . $row['qty'] . "</td>
-                                <td>" . $row['price'] . "</td>
+                                <td>$" . number_format($row['price'], 2) . "</td>
                                 <td>" . $row['dateadded'] . "</td>
                               </tr>";
                         }

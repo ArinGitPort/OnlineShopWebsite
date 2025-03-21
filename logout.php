@@ -1,3 +1,20 @@
+<?php
+session_start(); // Start the session
+
+// Check if the user confirmed the logout
+if (isset($_GET['confirm']) && $_GET['confirm'] == 'yes') {
+    // If confirmed, destroy the session and redirect to login
+    session_unset(); // Unset all session variables
+    session_destroy(); // Destroy the session
+    header("Location: login.php");
+    exit();
+} elseif (isset($_GET['confirm']) && $_GET['confirm'] == 'no') {
+    // If the user clicked "Cancel", redirect back to the inventory page
+    header("Location: inventory.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,12 +26,12 @@
         function confirmLogout() {
             // Display confirmation dialog
             var result = confirm("Are you sure you want to logout?");
-            // Redirect to login.php if user clicks "OK"
+            // If confirmed, go to logout.php with the 'confirm=yes' parameter
             if (result) {
-                window.location.href = "login.php";
+                window.location.href = "logout.php?confirm=yes";
             } else {
-                // Redirect back to inventory or previous page if user clicks "Cancel"
-                window.location.href = "inventory.php";
+                // If canceled, go back to inventory.php with 'confirm=no' parameter
+                window.location.href = "logout.php?confirm=no";
             }
         }
     </script>

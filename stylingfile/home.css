@@ -10,18 +10,26 @@
   margin: auto;
 }
 
+.introducePara{
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .slideshow-title {
   border-top: solid 2px;
   border-bottom: solid 2px;
   margin-bottom: 0;
   font-weight: bolder;
-  color: #97ada3;
+  color: #354359;
   font-size: 36px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 6px rgba(151, 173, 163, 1);
+  box-shadow: 0 0 6px rgb(167, 209, 250);
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }

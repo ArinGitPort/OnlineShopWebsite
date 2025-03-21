@@ -1,92 +1,126 @@
 body {
-    background-color: lightblue; /* Change to any color you prefer */
+  background: rgb(238,174,202);
+background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%); 
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 
 .loginBoxContainer {
-  display: inline-block;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  
-  align-items: center;
-  border: solid 2px;
-  border-radius: 8px;
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+display: inline-block;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
 
-  width: 300px;
-  height: 400px;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.7); /* White with 70% opacity */
+align-items: center;
+border: solid 2px;
+border-radius: 8px;
+box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+
+width: 300px;
+height: 450px;
+padding: 20px;
+background-color: rgba(255, 255, 255, 0.7); /* White with 70% opacity */
 }
 
 
 .iconDiv {
-  text-align: center;
+text-align: center;
 }
 
 .iconDiv img {
-  border: solid 0.5px;
-  box-shadow: 0 0 6px rgb(0, 0, 0, 0.5);
-  border-radius: 100px;
-  width: 40%;
-  height: 40%;
+border: solid 0.5px;
+box-shadow: 0 0 6px rgb(0, 0, 0, 0.5);
+border-radius: 100px;
+width: 40%;
 }
 
 .loginHeaderDiv{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+display: flex;
+flex-direction: column;
+align-items: center;
 }
 
 .loginHeader{
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .usernameBox {
-  font-size: 20px;
-  margin-bottom: 20px;
-  border-color: lightblue;
-  border-radius: 6px;
+  border: none;
   outline: none;
-  box-shadow: 0 0 6px rgb(135, 202, 199, 1);
+  border-radius: 8px;
+  padding: 1em;
+  background-color: #ccc;
+  box-shadow: inset 2px 5px 10px rgba(0,0,0,0.3);
+  transition: 300ms ease-in-out;
+}
+
+.usernameBox:hover {
+  background-color: white;
+  transform: scale(1.05);
+  box-shadow: 13px 13px 100px #969696,
+             -13px -13px 100px #ffffff;
+}
+
+
+.passwordBox {
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  padding: 1em;
+  background-color: #ccc;
+  box-shadow: inset 2px 5px 10px rgba(0,0,0,0.3);
+  transition: 300ms ease-in-out;
 
 }
 
-.passwordBox {
-  font-size: 20px;
-  margin-bottom: 20px;
-  outline: none;
-  border-color: lightblue;
-  border-radius: 6px;
-  box-shadow: 0 0 6px rgb(135, 202, 199, 1);
+.passwordBox:hover {
+  background-color: white;
+  transform: scale(1.05);
+  box-shadow: 13px 13px 100px #969696,
+             -13px -13px 100px #ffffff;
 
+}
+
+
+
+.forgotPassLink{
+margin-left: 40px;
 }
 
 .loginButtonDiv {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ justify-content: center;
+ margin-top: 15px;
 }
 
 .loginInfoDiv{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+display: flex;
+flex-direction: column;
+align-items: center;
+border-bottom: solid 2px black;
+margin-bottom: 10px;
 }
 
 .loginButton {
-  border-radius: 10px;
-  background-color: pink;
-  border: none;
-  padding: 6px;
-  font-size: 20px;
-  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s;
+border-radius: 10px;
+background-color: pink;
+border: none;
+padding: 6px;
+font-size: 20px;
+margin-right: 20px;
+transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s;
 }
 
 .loginButton:hover {
-  background-color: hotpink;
-  box-shadow: 0 0 6px rgba(184, 112, 112, 1);
-  transform: scale(1.1);
-  cursor: pointer;
+background-color: hotpink;
+box-shadow: 0 0 6px rgba(184, 112, 112, 1);
+transform: scale(1.1);
+cursor: pointer;
 }
+
+
+
+
