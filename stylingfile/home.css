@@ -5,7 +5,7 @@
 /* Slideshow container */
 .slideshow-container {
   max-width: 1000px;
-  width: 100%; /* Make the slideshow responsive */
+  width: 100%;
   position: relative;
   margin: auto;
 }
@@ -19,20 +19,19 @@
 }
 
 .slideshow-title {
-  border-top: solid 2px;
-  border-bottom: solid 2px;
+  width: 100%;           /* ensure full width */
+  text-align: center;    /* center the text */
+  border-top: 2px solid #354359;
+  border-bottom: 2px solid #354359;
   margin-bottom: 0;
   font-weight: bolder;
   color: #354359;
   font-size: 36px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   box-shadow: 0 0 6px rgb(167, 209, 250);
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  padding: 10px 0;       /* optional padding for breathing room */
 }
+
 
 .slideshow-image {
   border: none;
